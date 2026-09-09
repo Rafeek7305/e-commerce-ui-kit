@@ -1,0 +1,335 @@
+/* 
+ * Handzom UI Kit: Featured Cards Styles 
+ */
+
+:root {
+    --hz-zoom: 1.05;
+    --hz-duration: 500ms;
+    --hz-lift: -5px;
+}
+
+.handzom-featured-cards-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.handzom-cards-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5px 15px;
+}
+
+.handzom-section-title {
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0;
+    color: #111;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    letter-spacing: 0.5px;
+}
+
+.handzom-swiper-nav {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+/* Core Swiper Structural CSS (Ensures no blank space if Elementor Swiper CSS fails to load) */
+.handzom-swiper-container {
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    overflow: hidden;
+    list-style: none;
+    padding: 0;
+    z-index: 1;
+    width: 100%;
+    padding: 10px 0 40px;
+}
+
+.handzom-swiper-container .swiper-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: flex;
+    transition-property: transform;
+    box-sizing: content-box;
+}
+
+.handzom-swiper-container .swiper-slide {
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition-property: transform;
+}
+
+/* Fallback if Swiper is not initialized or JS fails */
+.handzom-swiper-container:not(.swiper-initialized) .swiper-wrapper {
+    display: flex;
+    gap: 2px;
+    overflow: hidden;
+}
+
+.handzom-swiper-container:not(.swiper-initialized) .swiper-slide {
+    flex: 0 0 calc(25% - 1.5px);
+    width: calc(25% - 1.5px);
+}
+
+@media (max-width: 1024px) {
+    .handzom-swiper-container:not(.swiper-initialized) .swiper-slide {
+        flex: 0 0 calc(33.333% - 1.33px);
+        width: calc(33.333% - 1.33px);
+    }
+}
+
+@media (max-width: 767px) {
+    .handzom-swiper-container:not(.swiper-initialized) .swiper-slide {
+        flex: 0 0 calc(50% - 1px);
+        width: calc(50% - 1px);
+    }
+}
+
+/* Base Card Style - Premium Minimalist (H&M / Zara inspired) */
+.handzom-featured-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+    transition: transform var(--hz-duration) cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    height: auto;
+}
+
+.handzom-featured-card:hover {
+    transform: translateY(var(--hz-lift));
+    z-index: 10;
+}
+
+.handzom-card-image-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 2/3;
+    /* Standard fashion portrait aspect ratio */
+    overflow: hidden;
+    background-color: #f5f5f5;
+    /* Light grey placeholder for loading */
+}
+
+.handzom-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform var(--hz-duration) cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.handzom-featured-card:hover .handzom-card-image {
+    transform: scale(var(--hz-zoom));
+}
+
+.handzom-card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.1);
+    /* Very subtle dark overlay if toggled */
+    z-index: 1;
+    opacity: 0;
+    transition: opacity var(--hz-duration) ease;
+}
+
+.handzom-featured-card:hover .handzom-card-overlay {
+    opacity: 1;
+}
+
+.handzom-card-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background-color: #000;
+    color: #fff;
+    padding: 4px 10px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    z-index: 2;
+}
+
+.handzom-card-stretched-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+}
+
+/* Content Area - Below Image */
+.handzom-card-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 5px 10px;
+    color: #111;
+}
+
+.handzom-card-content-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* Premium Typography defaults */
+.handzom-card-title-price-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.handzom-card-title {
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin: 0;
+    color: #111;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.handzom-card-price {
+    font-size: 13px;
+    font-weight: 400;
+    color: #111;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.handzom-card-subtitle {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #666;
+    margin-top: -2px;
+}
+
+.handzom-card-desc {
+    font-size: 12px;
+    line-height: 1.6;
+    color: #666;
+    margin-top: 4px;
+}
+
+.handzom-card-button-wrap {
+    display: block;
+    margin-top: 15px;
+    position: relative;
+    z-index: 2;
+}
+
+.handzom-card-button {
+    display: inline-block;
+    background-color: #000;
+    color: #fff;
+    padding: 12px 24px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.handzom-card-button:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+/* Button Slide Animation */
+.handzom-btn-slide .handzom-card-button-wrap {
+    position: absolute;
+    bottom: -50px;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    display: flex;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+
+.handzom-btn-slide .handzom-featured-card:hover .handzom-card-button-wrap {
+    bottom: 0;
+    opacity: 1;
+}
+
+.handzom-btn-slide .handzom-card-content {
+    overflow: hidden;
+    padding-bottom: 30px; /* space for the absolute button */
+}
+
+/* Swiper Navigation */
+.handzom-swiper-prev,
+.handzom-swiper-next {
+    position: relative;
+    width: auto;
+    height: auto;
+    background: transparent;
+    color: #999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    margin-top: 0;
+    transform: none;
+    top: auto;
+    left: auto;
+    right: auto;
+}
+
+/* Hide Swiper default pseudo-element arrows */
+.handzom-swiper-prev::after,
+.handzom-swiper-next::after {
+    display: none !important;
+    content: none !important;
+}
+
+.handzom-swiper-prev:hover,
+.handzom-swiper-next:hover {
+    color: #111;
+}
+
+.handzom-swiper-prev svg,
+.handzom-swiper-next svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Swiper Pagination */
+.handzom-swiper-pagination {
+    position: relative;
+    text-align: center;
+    margin-top: 25px;
+}
+
+.handzom-swiper-pagination .swiper-pagination-bullet {
+    width: 6px;
+    height: 6px;
+    background: #111;
+    opacity: 0.2;
+    margin: 0 6px !important;
+    transition: all 0.3s ease;
+}
+
+.handzom-swiper-pagination .swiper-pagination-bullet-active {
+    opacity: 1;
+    transform: scale(1.3);
+}

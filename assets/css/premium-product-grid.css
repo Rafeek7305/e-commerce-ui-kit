@@ -1,0 +1,281 @@
+/* 
+ * Handzom UI Kit - Premium Product Grid 
+ * Luxury, modern, neat UI. 
+ */
+
+.hz_pg_wrapper {
+    width: 100%;
+}
+
+.hz_pg_grid {
+    display: grid;
+    gap: 32px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Card Base */
+.hz_pg_card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    border: none;
+    height: 100%;
+}
+
+.hz_pg_card:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.09);
+    transform: translateY(-5px);
+}
+
+.hz_pg_image_wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background: #fff;
+    aspect-ratio: 4/5;
+}
+
+.hz_pg_image_wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Ensures entire product is visible */
+    background: transparent;
+    transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.hz_pg_card:hover .hz_pg_image_wrapper img {
+    transform: scale(1.05);
+}
+
+/* Badges */
+.hz_pg_badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: #000;
+    color: #fff;
+    padding: 6px 14px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 6px;
+    z-index: 2;
+}
+
+/* Content Area */
+.hz_pg_content {
+    padding: 24px 20px 30px;
+    text-align: center;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: flex-start;
+}
+
+/* Title */
+.hz_pg_title {
+    margin: 0 0 8px 0;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 0.3px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.hz_pg_title a {
+    color: #111;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.hz_pg_title a:hover {
+    color: #777;
+}
+
+/* Price */
+.hz_pg_price {
+    font-size: 15px;
+    color: #111;
+    font-weight: 600;
+    margin-top: auto;
+}
+
+.hz_pg_price del {
+    color: #999;
+    margin-right: 8px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.hz_pg_price ins {
+    text-decoration: none;
+    color: #d32f2f;
+    font-weight: 700;
+}
+
+/* Add to Cart Hover Action */
+.hz_pg_action {
+    position: absolute;
+    bottom: 30%;
+    left: 50%;
+    transform: translate(-50%, 20px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: 10;
+}
+
+.hz_pg_card:hover .hz_pg_action {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
+}
+
+.hz_pg_add_to_cart {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: #111;
+    color: #fff;
+    border-radius: 50%;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.hz_pg_add_to_cart:hover {
+    background: #333;
+    color: #fff;
+    transform: scale(1.08);
+}
+
+/* Pagination - Luxury Circular */
+.hz_pg_pagination_wrapper {
+    margin-top: 60px;
+    text-align: center;
+    width: 100%;
+}
+
+.hz_pg_pagination_wrapper .woocommerce-pagination {
+    display: flex;
+    justify-content: center;
+}
+
+.hz_pg_pagination_wrapper .woocommerce-pagination ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.hz_pg_pagination_wrapper .woocommerce-pagination ul li {
+    display: block;
+}
+
+.hz_pg_pagination_wrapper .woocommerce-pagination .page-numbers {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    background: #fff;
+    color: #333;
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+    border-radius: 50%;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border: 1px solid #eaeaea;
+}
+
+.hz_pg_pagination_wrapper .woocommerce-pagination .page-numbers:hover {
+    transform: scale(1.1);
+    border-color: #111;
+    color: #111;
+}
+
+.hz_pg_pagination_wrapper .woocommerce-pagination .page-numbers.current {
+    background: #111;
+    color: #fff;
+    border-color: #111;
+    transform: scale(1.1);
+}
+
+.hz_pg_pagination_wrapper .woocommerce-pagination .page-numbers.next,
+.hz_pg_pagination_wrapper .woocommerce-pagination .page-numbers.prev {
+    font-size: 18px;
+}
+
+.hz_pg_no_products {
+    text-align: center;
+    padding: 60px 0;
+    font-size: 18px;
+    color: #555;
+    font-weight: 500;
+}
+
+/* Responsive Overrides */
+@media (min-width: 1025px) {
+    .hz_pg_grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 1024px) {
+    .hz_pg_grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 24px;
+    }
+    .hz_pg_action {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        bottom: 15px;
+        right: 15px;
+    }
+    .hz_pg_add_to_cart {
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+}
+
+@media (max-width: 768px) {
+    .hz_pg_grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hz_pg_grid {
+        grid-template-columns: repeat(1, 1fr) !important;
+        gap: 24px;
+    }
+    .hz_pg_title {
+        font-size: 15px;
+    }
+    .hz_pg_price {
+        font-size: 15px;
+    }
+    .hz_pg_content {
+        padding: 20px 15px;
+    }
+}

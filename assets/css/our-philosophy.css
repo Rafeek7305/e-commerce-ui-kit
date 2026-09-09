@@ -1,0 +1,127 @@
+/**
+ * Handzom UI Kit: Our Philosophy Widget CSS
+ */
+
+:root {
+    --hz-op-text: #333333;
+    --hz-op-heading: #111111;
+    --hz-op-border: rgba(0, 0, 0, 0.1);
+    --hz-op-bg: #f9f8f6; /* Default beige-ish background from screenshot */
+}
+
+.hz-op-wrapper {
+    background-color: var(--hz-op-bg);
+    padding: 80px 40px;
+    width: 100%;
+}
+
+/* Header */
+.hz-op-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.hz-op-title {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--hz-op-text);
+    margin: 0 0 15px 0;
+}
+
+.hz-op-divider-top {
+    width: 40px;
+    height: 1px;
+    background-color: var(--hz-op-text);
+    margin: 0 auto;
+    opacity: 0.3;
+}
+
+/* Container */
+.hz-op-cards-container {
+    display: grid;
+    /* Columns are set via Elementor settings dynamically */
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 0; 
+}
+
+/* Card */
+.hz-op-card {
+    padding: 0 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.has-dividers .hz-op-card {
+    border-right: 1px solid var(--hz-op-border);
+}
+
+.has-dividers .hz-op-card:last-child {
+    border-right: none;
+}
+
+/* Typography */
+.hz-op-number {
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--hz-op-heading);
+    margin: 0 0 15px 0;
+    line-height: 1;
+}
+
+.hz-op-heading {
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--hz-op-heading);
+    margin: 0 0 20px 0;
+    line-height: 1.2;
+}
+
+.hz-op-desc {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--hz-op-text);
+    margin: 0;
+    opacity: 0.8;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .hz-op-wrapper {
+        padding: 60px 30px;
+    }
+    
+    .hz-op-card {
+        padding: 0 20px;
+        margin-bottom: 40px;
+    }
+    
+    /* On tablet, borders should reset or change based on columns */
+    .has-dividers .hz-op-card {
+        border-right: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .hz-op-wrapper {
+        padding: 50px 20px;
+    }
+    
+    .hz-op-cards-container {
+        /* Default to 1 column on mobile if not overridden by Elementor */
+        grid-template-columns: 1fr !important;
+        gap: 40px;
+    }
+    
+    .hz-op-card {
+        padding: 0;
+        margin-bottom: 0;
+        text-align: center;
+    }
+    
+    .has-dividers .hz-op-card {
+        border-right: none;
+    }
+}

@@ -1,0 +1,991 @@
+/* ==========================================================================
+   HANDZOM UI KIT - CUSTOM RESPONSIVE CHECKOUT PAGE
+   Strictly Scoped under .hz-checkout-page / .handzom-checkout-wrapper
+   ========================================================================== */
+
+/* Main Container Scope */
+.hz-checkout-page,
+.handzom-checkout-wrapper {
+    width: 100% !important;
+    max-width: 1280px !important;
+    margin: 0 auto !important;
+    padding: 20px 15px 60px !important;
+    font-family: "Ysabeau Office", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif !important;
+    color: #111111 !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+    clear: both !important;
+    display: block !important;
+}
+
+.hz-checkout-page *,
+.hz-checkout-page *::before,
+.hz-checkout-page *::after {
+    box-sizing: border-box !important;
+}
+
+/* Header & Progress Bar */
+.hz-checkout-page .hz-checkout-header {
+    text-align: center !important;
+    margin-bottom: 30px !important;
+}
+
+.hz-checkout-page .hz-checkout-title {
+    font-size: 30px !important;
+    font-weight: 300 !important;
+    letter-spacing: 2.5px !important;
+    margin: 0 0 8px !important;
+    text-transform: uppercase !important;
+    color: #111111 !important;
+}
+
+.hz-checkout-page .hz-checkout-progress {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 12px !important;
+    font-size: 12.5px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1.5px !important;
+    color: #777777 !important;
+}
+
+.hz-checkout-page .hz-progress-step.active {
+    color: #111111 !important;
+    font-weight: 700 !important;
+}
+
+.hz-checkout-page .hz-progress-sep {
+    color: #cccccc !important;
+}
+
+/* --------------------------------------------------------------------------
+   WOOCOMMERCE NOTICES & ERROR BANNER OVERRIDES
+   Custom neutral Handzom styling (No bright blue border)
+   -------------------------------------------------------------------------- */
+.hz-checkout-page .woocommerce-NoticeGroup-checkout,
+.hz-checkout-page .hz-checkout-notices {
+    margin-bottom: 24px !important;
+}
+
+.hz-checkout-page .woocommerce-info,
+.hz-checkout-page .woocommerce-notice,
+.hz-checkout-page .woocommerce-message,
+.hz-checkout-page .woocommerce-error,
+.hz-checkout-page p.woocommerce-info,
+.hz-checkout-page p.woocommerce-notice {
+    margin: 0 0 16px 0 !important;
+    padding: 14px 18px !important;
+    font-size: 13.5px !important;
+    line-height: 1.5 !important;
+    border-radius: 2px !important;
+    background-color: #fafafa !important;
+    border: 1px solid #e5e5e5 !important;
+    border-top: 1px solid #e5e5e5 !important; /* Overrides WC bright blue top border */
+    border-left: 3px solid #111111 !important;
+    color: #111111 !important;
+    list-style: none !important;
+}
+
+.hz-checkout-page .woocommerce-info::before,
+.hz-checkout-page .woocommerce-notice::before,
+.hz-checkout-page p.woocommerce-info::before {
+    display: none !important;
+}
+
+.hz-checkout-page .woocommerce-error {
+    border: 1px solid #f5c6cb !important;
+    border-top: 1px solid #f5c6cb !important;
+    border-left: 3px solid #d32f2f !important;
+    background-color: #fff8f8 !important;
+    color: #b71c1c !important;
+}
+
+.hz-checkout-page .woocommerce-error li {
+    margin-bottom: 4px !important;
+    list-style: none !important;
+}
+
+.hz-checkout-page .woocommerce-message {
+    border: 1px solid #c3e6cb !important;
+    border-top: 1px solid #c3e6cb !important;
+    border-left: 3px solid #28a745 !important;
+    background-color: #f4fbf7 !important;
+    color: #155724 !important;
+}
+
+/* --------------------------------------------------------------------------
+   1. DESKTOP GRID LAYOUT (≥ 1024px)
+   Forcing side-by-side 2-column layout starting at the exact same top position
+   -------------------------------------------------------------------------- */
+@media (min-width: 1024px) {
+    .hz-checkout-page .hz-checkout-grid-container {
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr) 380px !important;
+        gap: 40px !important;
+        align-items: start !important;
+        width: 100% !important;
+        float: none !important;
+        clear: both !important;
+    }
+
+    /* Left Column: Form Fields */
+    .hz-checkout-page .hz-checkout-form-column {
+        grid-column: 1 !important;
+        grid-row: 1 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        float: none !important;
+        box-sizing: border-box !important;
+        align-self: start !important;
+    }
+
+    /* Right Column: Sticky Summary Card */
+    .hz-checkout-page .hz-checkout-summary-column {
+        grid-column: 2 !important;
+        grid-row: 1 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        position: -webkit-sticky !important;
+        position: sticky !important;
+        top: 110px !important; /* Top offset below Handzom sticky header */
+        align-self: start !important;
+        z-index: 10 !important;
+        float: none !important;
+        box-sizing: border-box !important;
+    }
+}
+
+@media (min-width: 1280px) {
+    .hz-checkout-page .hz-checkout-grid-container {
+        grid-template-columns: minmax(0, 1fr) 400px !important;
+        gap: 45px !important;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   2. MOBILE & TABLET STACK (< 1024px)
+   Single column layout with normal page scrolling
+   -------------------------------------------------------------------------- */
+@media (max-width: 1023px) {
+    .hz-checkout-page .hz-checkout-grid-container {
+        display: block !important;
+        width: 100% !important;
+    }
+
+    .hz-checkout-page .hz-checkout-form-column,
+    .hz-checkout-page .hz-checkout-summary-column {
+        width: 100% !important;
+        max-width: 100% !important;
+        display: block !important;
+        position: static !important;
+        top: auto !important;
+        margin-bottom: 26px !important;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   3. LEFT FORM SECTIONS & TYPOGRAPHY
+   -------------------------------------------------------------------------- */
+.hz-checkout-page .hz-checkout-section {
+    margin-bottom: 24px !important;
+}
+
+.hz-checkout-page .hz-section-title {
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1.5px !important;
+    border-bottom: 1px solid #e5e5e5 !important;
+    padding-bottom: 10px !important;
+    margin: 0 0 16px 0 !important;
+    color: #111111 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+}
+
+.hz-checkout-page .hz-optional-tag {
+    font-size: 11px !important;
+    font-weight: 400 !important;
+    text-transform: lowercase !important;
+    color: #666666 !important;
+    letter-spacing: 0 !important;
+}
+
+/* Form Fields Grid */
+.hz-checkout-page .hz-fields-grid {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 14px 16px !important;
+}
+
+.hz-checkout-page .form-row {
+    margin: 0 0 14px 0 !important;
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.hz-checkout-page .form-row-first,
+.hz-checkout-page .form-row-last {
+    width: calc(50% - 8px) !important;
+    display: inline-flex !important;
+}
+
+.hz-checkout-page .form-row-wide {
+    width: 100% !important;
+}
+
+/* Labels & Asterisk Visibility */
+.hz-checkout-page label {
+    display: block !important;
+    font-size: 12.5px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.8px !important;
+    margin-bottom: 6px !important;
+    color: #111111 !important; /* Visible dark black label */
+}
+
+.hz-checkout-page label .required,
+.hz-checkout-page label abbr.required {
+    color: #111111 !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+    margin-left: 3px !important;
+}
+
+.hz-checkout-page .woocommerce-input-wrapper {
+    width: 100% !important;
+    display: block !important;
+}
+
+/* Inputs & Textareas */
+.hz-checkout-page input[type="text"],
+.hz-checkout-page input[type="email"],
+.hz-checkout-page input[type="tel"],
+.hz-checkout-page input[type="password"],
+.hz-checkout-page select,
+.hz-checkout-page textarea {
+    width: 100% !important;
+    height: 44px !important;
+    padding: 0 14px !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    font-family: inherit !important;
+    color: #222222 !important; /* Dark readable input text */
+    background-color: #ffffff !important;
+    border: 1px solid #cccccc !important;
+    border-radius: 2px !important;
+    outline: none !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    box-shadow: none !important;
+}
+
+.hz-checkout-page input::placeholder,
+.hz-checkout-page textarea::placeholder {
+    color: #777777 !important; /* Readable medium-light gray */
+    opacity: 1 !important;
+}
+
+.hz-checkout-page select {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='%23111111' d='M0 0l5 6 5-6z'/></svg>") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 14px center !important;
+    padding-right: 32px !important;
+}
+
+.hz-checkout-page textarea {
+    height: 90px !important;
+    padding: 12px 14px !important;
+    resize: vertical !important;
+}
+
+.hz-checkout-page input:focus,
+.hz-checkout-page select:focus,
+.hz-checkout-page textarea:focus {
+    border-color: #111111 !important;
+    box-shadow: 0 0 0 1px #111111 !important;
+}
+
+/* Field Validation Error Highlight */
+.hz-checkout-page .woocommerce-invalid input,
+.hz-checkout-page .woocommerce-invalid select,
+.hz-checkout-page .woocommerce-invalid textarea {
+    border-color: #d32f2f !important;
+    background-color: #fffcfc !important;
+}
+
+.hz-checkout-page .woocommerce-invalid label {
+    color: #d32f2f !important;
+}
+
+/* Select2 / Country & State Dropdown Selection Box */
+.hz-checkout-page .select2-container--default .select2-selection--single {
+    height: 44px !important;
+    border: 1px solid #cccccc !important;
+    border-radius: 2px !important;
+    padding: 7px 14px !important;
+    background-color: #ffffff !important;
+    transition: border-color 0.2s ease !important;
+}
+
+.hz-checkout-page .select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 28px !important;
+    color: #222222 !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    padding-left: 0 !important;
+}
+
+.hz-checkout-page .select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 42px !important;
+    right: 10px !important;
+}
+
+.hz-checkout-page .select2-container--default .select2-selection--single .select2-selection__arrow b {
+    border-color: #111111 transparent transparent transparent !important;
+    border-width: 5px 4px 0 4px !important;
+}
+
+.hz-checkout-page .select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow b {
+    border-color: transparent transparent #111111 transparent !important;
+    border-width: 0 4px 5px 4px !important;
+}
+
+.hz-checkout-page .select2-container--default.select2-container--open .select2-selection--single,
+.hz-checkout-page .select2-container--default.select2-container--focus .select2-selection--single {
+    border-color: #111111 !important;
+    outline: none !important;
+}
+
+.hz-checkout-page .select2-container--default.select2-container--open.select2-container--below .select2-selection--single {
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+/* Select2 Dropdown Container (Appended to body, so styled globally for Handzom look) */
+.select2-container--default .select2-dropdown {
+    border: 1px solid #111111 !important;
+    border-radius: 0 0 2px 2px !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08) !important;
+    background-color: #ffffff !important;
+    font-family: "Ysabeau Office", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    z-index: 999999 !important;
+}
+
+.select2-container--default .select2-dropdown--below {
+    border-top: none !important;
+    border-radius: 0 0 2px 2px !important;
+}
+
+/* Dropdown Search Input Field */
+.select2-container--default .select2-search--dropdown {
+    padding: 8px 10px !important;
+}
+
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    border: 1px solid #e0e0e0 !important;
+    border-radius: 2px !important;
+    padding: 7px 12px !important;
+    font-size: 13px !important;
+    font-family: inherit !important;
+    outline: none !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    transition: border-color 0.2s ease !important;
+}
+
+.select2-container--default .select2-search--dropdown .select2-search__field:focus {
+    border-color: #111111 !important;
+}
+
+/* Dropdown Options List Container */
+.select2-container--default .select2-results > .select2-results__options {
+    max-height: 220px !important;
+    overflow-y: auto !important;
+    padding: 4px 0 !important;
+}
+
+/* Custom Scrollbar for Options List */
+.select2-container--default .select2-results > .select2-results__options::-webkit-scrollbar {
+    width: 6px;
+}
+.select2-container--default .select2-results > .select2-results__options::-webkit-scrollbar-track {
+    background: #f9f9f9;
+}
+.select2-container--default .select2-results > .select2-results__options::-webkit-scrollbar-thumb {
+    background: #cccccc;
+    border-radius: 3px;
+}
+.select2-container--default .select2-results > .select2-results__options::-webkit-scrollbar-thumb:hover {
+    background: #999999;
+}
+
+/* Base Option Item */
+.select2-container--default .select2-results__option {
+    padding: 9px 14px !important;
+    font-size: 13.5px !important;
+    color: #222222 !important;
+    cursor: pointer !important;
+    transition: background-color 0.15s ease, color 0.15s ease !important;
+}
+
+/* Selected Option Item */
+html body .select2-container--default .select2-results__option[aria-selected="true"],
+html body .select2-container--default .select2-results__option[data-selected="true"],
+html body.woocommerce-checkout .select2-container--default .select2-results__option[aria-selected="true"],
+html body.woocommerce-checkout .select2-container--default .select2-results__option[data-selected="true"],
+.select2-container--default .select2-results__option[aria-selected="true"],
+.select2-container--default .select2-results__option[data-selected="true"] {
+    background-color: #f4f4f4 !important;
+    color: #111111 !important;
+    font-weight: 600 !important;
+}
+
+/* THEME HOVER / HIGHLIGHTED OPTION (Overrides default bright blue with Handzom luxury black) */
+html body .select2-container--default .select2-results__option--highlighted,
+html body .select2-container--default .select2-results__option--highlighted[aria-selected],
+html body .select2-container--default .select2-results__option--highlighted[data-selected],
+html body .select2-container--default .select2-results__option--highlighted[data-selected="true"],
+html body .select2-container--default .select2-results__option--highlighted[data-selected="false"],
+html body.woocommerce-checkout .select2-container--default .select2-results__option--highlighted,
+html body.woocommerce-checkout .select2-container--default .select2-results__option--highlighted[aria-selected],
+html body.woocommerce-checkout .select2-container--default .select2-results__option--highlighted[data-selected],
+html body.woocommerce-checkout .select2-container--default .select2-results__option--highlighted[data-selected="true"],
+html body.woocommerce-checkout .select2-container--default .select2-results__option--highlighted[data-selected="false"],
+.woocommerce .select2-container--default .select2-results__option--highlighted,
+.woocommerce .select2-container--default .select2-results__option--highlighted[aria-selected],
+.woocommerce .select2-container--default .select2-results__option--highlighted[data-selected],
+.select2-container--default .select2-results__option--highlighted,
+.select2-container--default .select2-results__option--highlighted[aria-selected],
+.select2-container--default .select2-results__option--highlighted[data-selected],
+.select2-results__option--highlighted {
+    background-color: #111111 !important;
+    color: #ffffff !important;
+}
+
+/* Disabled Option */
+.select2-container--default .select2-results__option[aria-disabled="true"] {
+    color: #aaaaaa !important;
+    background-color: transparent !important;
+    cursor: not-allowed !important;
+}
+
+/* Shipping Toggle Checkbox */
+.hz-checkout-page .hz-shipping-toggle-wrapper {
+    margin-bottom: 18px !important;
+    padding: 12px 0 !important;
+    border-top: 1px dashed #e5e5e5 !important;
+    border-bottom: 1px dashed #e5e5e5 !important;
+}
+
+.hz-checkout-page .hz-checkbox-label {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    font-size: 13.5px !important;
+    font-weight: 600 !important;
+    color: #111111 !important;
+    cursor: pointer !important;
+    text-transform: none !important;
+    letter-spacing: 0 !important;
+    margin: 0 !important;
+}
+
+.hz-checkout-page input[type="checkbox"],
+.hz-checkout-page input[type="radio"] {
+    accent-color: #111111 !important;
+    width: 16px !important;
+    height: 16px !important;
+    cursor: pointer !important;
+    margin: 0 !important;
+}
+
+/* --------------------------------------------------------------------------
+   4. RIGHT COLUMN - YOUR ORDER SUMMARY CARD
+   -------------------------------------------------------------------------- */
+.hz-checkout-page .hz-checkout-summary-card {
+    background: #fafafa !important;
+    border: 1px solid #e5e5e5 !important;
+    padding: 24px 22px !important;
+    border-radius: 2px !important;
+}
+
+.hz-checkout-page .hz-summary-title {
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1.8px !important;
+    border-bottom: 1px solid #e5e5e5 !important;
+    padding-bottom: 12px !important;
+    margin: 0 0 18px 0 !important;
+    color: #111111 !important;
+}
+
+/* Cart Items List */
+.hz-checkout-page .hz-cart-items-list {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 14px !important;
+    margin-bottom: 18px !important;
+    max-height: 380px !important;
+    overflow-y: auto !important;
+    padding-right: 4px !important;
+}
+
+.hz-checkout-page .hz-summary-item {
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 14px !important;
+    padding-bottom: 14px !important;
+    margin-bottom: 14px !important;
+    border-bottom: 1px solid #eaeaea !important;
+}
+
+.hz-checkout-page .hz-summary-item:last-child {
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+/* Product Thumbnail Container (72px W x 88px H) */
+.hz-checkout-page .hz-summary-item-img-wrap,
+.handzom-checkout-wrapper .hz-summary-item-img-wrap,
+.hz-summary-item-img-wrap {
+    width: 72px !important;
+    height: 88px !important;
+    flex-shrink: 0 !important;
+    background: #f9f9f9 !important;
+    border: 1px solid #e5e5e5 !important;
+    border-radius: 2px !important;
+    overflow: hidden !important;
+    position: relative !important;
+    display: block !important;
+}
+
+.hz-checkout-page .hz-summary-item-img-wrap a,
+.handzom-checkout-wrapper .hz-summary-item-img-wrap a,
+.hz-summary-item-img-wrap a {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.hz-checkout-page .hz-summary-thumb,
+.hz-checkout-page .hz-summary-item-img-wrap img,
+.handzom-checkout-wrapper .hz-summary-thumb,
+.handzom-checkout-wrapper .hz-summary-item-img-wrap img,
+.hz-summary-item-img-wrap img {
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 100% !important;
+    min-height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: cover !important;
+    object-position: top center !important;
+    display: block !important;
+}
+
+.hz-checkout-page .hz-summary-item-details {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+}
+
+.hz-checkout-page .hz-summary-item-name {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #111111 !important;
+    margin: 0 0 4px 0 !important;
+    line-height: 1.3 !important;
+}
+
+/* Product Variation Attributes - Inline label and value (Color: Beige / Size: L) */
+.hz-checkout-page .hz-summary-item-details dl.variation {
+    display: block !important;
+    margin: 4px 0 6px 0 !important;
+    padding: 0 !important;
+    font-size: 12.5px !important;
+}
+
+.hz-checkout-page .hz-summary-item-details dl.variation dt {
+    display: inline !important;
+    float: none !important;
+    font-weight: 600 !important;
+    color: #555555 !important;
+    margin: 0 4px 0 0 !important;
+    padding: 0 !important;
+    font-size: 12.5px !important;
+    line-height: 1.4 !important;
+}
+
+.hz-checkout-page .hz-summary-item-details dl.variation dd {
+    display: inline !important;
+    float: none !important;
+    color: #222222 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 12.5px !important;
+    line-height: 1.4 !important;
+}
+
+.hz-checkout-page .hz-summary-item-details dl.variation dd p {
+    display: inline !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Force each attribute pair onto its OWN line */
+.hz-checkout-page .hz-summary-item-details dl.variation dd::after {
+    content: "" !important;
+    display: block !important;
+}
+
+.hz-checkout-page .hz-summary-item-qty {
+    font-size: 12px !important;
+    color: #555555 !important;
+    font-weight: 500 !important;
+    margin-top: 2px !important;
+}
+
+.hz-checkout-page .hz-summary-item-price {
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    color: #111111 !important;
+    white-space: nowrap !important;
+    text-align: right !important;
+    flex-shrink: 0 !important;
+    align-self: flex-start !important;
+}
+
+/* Coupon Box Area */
+.hz-checkout-page .hz-checkout-coupon-area {
+    margin-bottom: 18px !important;
+    border-top: 1px solid #eaeaea !important;
+    border-bottom: 1px solid #eaeaea !important;
+    padding: 14px 0 !important;
+}
+
+.hz-checkout-page .hz-coupon-toggle {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    font-size: 12.5px !important;
+}
+
+.hz-checkout-page .hz-coupon-label {
+    color: #333333 !important;
+    font-weight: 500 !important;
+}
+
+.hz-checkout-page .hz-toggle-coupon-btn {
+    background: transparent !important;
+    border: none !important;
+    color: #111111 !important;
+    font-size: 11.5px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    cursor: pointer !important;
+    text-decoration: underline !important;
+    padding: 0 !important;
+}
+
+.hz-checkout-page .hz-coupon-form-box {
+    margin-top: 10px !important;
+}
+
+.hz-checkout-page .hz-coupon-input-group {
+    display: flex !important;
+    gap: 0 !important;
+}
+
+.hz-checkout-page .hz-coupon-input {
+    flex: 1 1 auto !important;
+    border: 1px solid #cccccc !important;
+    border-right: none !important;
+    height: 38px !important;
+    padding: 0 12px !important;
+    font-size: 13px !important;
+    border-radius: 2px 0 0 2px !important;
+}
+
+.hz-checkout-page .hz-apply-coupon-btn {
+    background-color: #111111 !important;
+    color: #ffffff !important;
+    border: 1px solid #111111 !important;
+    height: 38px !important;
+    padding: 0 16px !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    cursor: pointer !important;
+    border-radius: 0 2px 2px 0 !important;
+    transition: background-color 0.2s ease !important;
+}
+
+.hz-checkout-page .hz-apply-coupon-btn:hover {
+    background-color: #333333 !important;
+}
+
+.hz-checkout-page .hz-coupon-message {
+    font-size: 12px !important;
+    margin-top: 6px !important;
+}
+.hz-checkout-page .hz-coupon-message.success {
+    color: #62d2a2 !important;
+}
+.hz-checkout-page .hz-coupon-message.error {
+    color: #d32f2f !important;
+}
+
+/* Order Totals Table */
+.hz-checkout-page .hz-totals-table {
+    margin-bottom: 18px !important;
+}
+
+.hz-checkout-page .hz-total-row {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    font-size: 13.5px !important;
+    margin-bottom: 10px !important;
+    color: #333333 !important;
+}
+
+.hz-checkout-page .hz-total-value {
+    font-weight: 600 !important;
+    color: #111111 !important;
+}
+
+.hz-checkout-page .hz-discount-row {
+    color: #62d2a2 !important;
+}
+.hz-checkout-page .hz-discount-row .hz-total-value {
+    color: #62d2a2 !important;
+}
+
+.hz-checkout-page .hz-remove-coupon-link {
+    color: #777777 !important;
+    font-size: 11px !important;
+    margin-left: 6px !important;
+    text-decoration: none !important;
+}
+.hz-checkout-page .hz-remove-coupon-link:hover {
+    color: #d32f2f !important;
+}
+
+.hz-checkout-page .hz-shipping-methods-wrapper {
+    margin: 12px 0 !important;
+    padding: 10px 0 !important;
+    border-top: 1px dashed #eaeaea !important;
+    border-bottom: 1px dashed #eaeaea !important;
+}
+
+.hz-checkout-page .hz-shipping-heading {
+    display: block !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    margin-bottom: 8px !important;
+    color: #111111 !important;
+}
+
+.hz-checkout-page #shipping_method,
+.hz-checkout-page ul.woocommerce-shipping-methods {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.hz-checkout-page ul.woocommerce-shipping-methods li {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin-bottom: 6px !important;
+    font-size: 13px !important;
+}
+
+.hz-checkout-page .hz-grand-total-row {
+    border-top: 1px solid #eaeaea !important;
+    padding-top: 14px !important;
+    margin-top: 14px !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    color: #111111 !important;
+}
+
+.hz-checkout-page .hz-grand-total-row .hz-total-value {
+    font-size: 18px !important;
+    font-weight: 700 !important;
+}
+
+/* Payment Gateway Box */
+.hz-checkout-page .hz-checkout-payment-box {
+    margin-top: 18px !important;
+    border-top: 1px solid #eaeaea !important;
+    padding-top: 16px !important;
+}
+
+.hz-checkout-page .hz-payment-title {
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1.5px !important;
+    margin: 0 0 14px 0 !important;
+    color: #111111 !important;
+}
+
+.hz-checkout-page ul.wc_payment_methods {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 0 16px 0 !important;
+}
+
+.hz-checkout-page ul.wc_payment_methods li.wc_payment_method {
+    margin-bottom: 10px !important;
+    border: 1px solid #e5e5e5 !important;
+    border-radius: 2px !important;
+    background: #ffffff !important;
+    overflow: hidden !important;
+}
+
+.hz-checkout-page ul.wc_payment_methods li.wc_payment_method label {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    padding: 12px 14px !important;
+    margin: 0 !important;
+    cursor: pointer !important;
+    font-size: 13.5px !important;
+    font-weight: 600 !important;
+    text-transform: none !important;
+    letter-spacing: 0 !important;
+    color: #111111 !important;
+}
+
+.hz-checkout-page ul.wc_payment_methods li.wc_payment_method input[type="radio"] {
+    margin-right: 6px !important;
+}
+
+.hz-checkout-page div.payment_box {
+    background: #f7f7f7 !important;
+    padding: 12px 14px !important;
+    font-size: 12.5px !important;
+    line-height: 1.5 !important;
+    color: #444444 !important;
+    border-top: 1px solid #eaeaea !important;
+}
+
+/* Place Order Primary Handzom Button */
+.hz-checkout-page .hz-place-order-wrapper {
+    margin-top: 18px !important;
+}
+
+.hz-checkout-page .hz-place-order-btn,
+.handzom-checkout-wrapper .hz-place-order-btn,
+.hz-checkout-page #place_order,
+.handzom-checkout-wrapper #place_order,
+#place_order.hz-place-order-btn,
+button#place_order {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    width: 100% !important;
+    height: 50px !important;
+    min-height: 50px !important;
+    max-height: 50px !important;
+    padding: 0 20px !important;
+    margin: 0 !important;
+    line-height: 1 !important;
+    background-color: #111111 !important;
+    color: #ffffff !important;
+    border: 1px solid #111111 !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 2px !important;
+    cursor: pointer !important;
+    border-radius: 2px !important;
+    box-sizing: border-box !important;
+    vertical-align: middle !important;
+    transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease !important;
+}
+
+.hz-checkout-page .hz-place-order-btn:hover,
+.hz-checkout-page .hz-place-order-btn:focus,
+.handzom-checkout-wrapper .hz-place-order-btn:hover,
+.handzom-checkout-wrapper .hz-place-order-btn:focus,
+.hz-checkout-page #place_order:hover,
+.hz-checkout-page #place_order:focus,
+#place_order.hz-place-order-btn:hover,
+#place_order.hz-place-order-btn:focus,
+button#place_order:hover,
+button#place_order:focus {
+    background-color: #ffffff !important;
+    color: #111111 !important;
+    border-color: #111111 !important;
+    outline: none !important;
+}
+
+.hz-checkout-page .hz-place-order-btn:active,
+.handzom-checkout-wrapper .hz-place-order-btn:active,
+.hz-checkout-page #place_order:active,
+#place_order.hz-place-order-btn:active,
+button#place_order:active {
+    background-color: #f0f0f0 !important;
+}
+
+/* Mobile Screen Small Tweaks (< 600px) */
+@media (max-width: 600px) {
+    .hz-checkout-page {
+        padding: 15px 10px 40px !important;
+    }
+
+    .hz-checkout-page .hz-checkout-title {
+        font-size: 22px !important;
+        letter-spacing: 1.5px !important;
+    }
+
+    .hz-checkout-page .form-row-first,
+    .hz-checkout-page .form-row-last {
+        width: 100% !important;
+        display: flex !important;
+    }
+
+    .hz-checkout-page .hz-checkout-summary-card {
+        padding: 18px 14px !important;
+    }
+
+    .hz-checkout-page .hz-summary-item-img-wrap,
+    .handzom-checkout-wrapper .hz-summary-item-img-wrap,
+    .hz-summary-item-img-wrap {
+        width: 64px !important;
+        height: 78px !important;
+    }
+
+    .hz-checkout-page .hz-summary-item-name {
+        font-size: 13.5px !important;
+    }
+
+    .hz-checkout-page .hz-place-order-btn,
+    .handzom-checkout-wrapper .hz-place-order-btn,
+    .hz-checkout-page #place_order,
+    .handzom-checkout-wrapper #place_order,
+    #place_order.hz-place-order-btn,
+    button#place_order {
+        height: 48px !important;
+        min-height: 48px !important;
+        max-height: 48px !important;
+        line-height: 1 !important;
+        padding: 0 15px !important;
+        font-size: 12px !important;
+    }
+}

@@ -1,0 +1,752 @@
+/* 
+ * Handzom UI Kit - Premium Glass Header
+ */
+@import url('https://fonts.googleapis.com/css2?family=Ysabeau+Office:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --hz-pgh-font: 'Ysabeau Office', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --hz-pgh-transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --hz-pgh-glass-bg: rgba(255, 255, 255, 0.12);
+    --hz-pgh-glass-border: rgba(255, 255, 255, 0.18);
+    --hz-pgh-glass-blur: 18px;
+    --hz-pgh-text: #ffffff;
+    --hz-pgh-hover: #ffffff;
+}
+
+/* Body scroll lock when drawer is active */
+html.hz-pgh-drawer-open,
+body.hz-pgh-drawer-open {
+    overflow: hidden !important;
+    touch-action: none !important;
+}
+
+/* Wrapper */
+.hz-pgh-wrapper {
+    position: relative;
+    width: 100%;
+    z-index: 9999;
+    font-family: var(--hz-pgh-font);
+}
+
+.hz-pgh-wrapper *,
+.hz-pgh-wrapper *::before,
+.hz-pgh-wrapper *::after {
+    box-sizing: border-box;
+}
+
+/* Announcement Bar */
+.hz-pgh-announcement {
+    background-color: #000;
+    color: #fff;
+    padding: 10px 40px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    z-index: 10000;
+}
+
+.hz-pgh-announcement-inner {
+    white-space: nowrap;
+    animation: hzPghMarquee 20s linear infinite;
+}
+
+.hz-pgh-announcement-inner:hover {
+    animation-play-state: paused;
+}
+
+.hz-pgh-announcement p {
+    margin: 0;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.hz-pgh-announcement-close {
+    position: absolute;
+    right: 15px;
+    background: none;
+    border: none;
+    color: currentColor;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hz-pgh-announcement-close:hover {
+    opacity: 1;
+}
+
+.hz-pgh-announcement-close svg {
+    width: 14px;
+    height: 14px;
+}
+
+@keyframes hzPghMarquee {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* Main Header Inner */
+.hz-pgh-header-inner {
+    position: relative;
+    width: 100%;
+    height: 70px;
+    z-index: 10001;
+    background: transparent;
+    border-bottom: none;
+    transition: var(--hz-pgh-transition);
+    display: flex;
+    align-items: center;
+    box-shadow: none;
+}
+
+/* Sticky State */
+.hz-pgh-wrapper.is-sticky .hz-pgh-header-inner {
+    position: fixed;
+    top: 0;
+    background: rgba(255, 255, 255, 0.95);
+    /* Will be overridden by Elementor selectors */
+    backdrop-filter: blur(25px) !important;
+    -webkit-backdrop-filter: blur(25px) !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    height: 60px !important;
+    /* Will be set by JS or Elementor */
+}
+
+/* WordPress Admin Bar Fix for Sticky Header */
+body.admin-bar .hz-pgh-wrapper.is-sticky .hz-pgh-header-inner {
+    top: 32px;
+}
+
+@media screen and (max-width: 782px) {
+    body.admin-bar .hz-pgh-wrapper.is-sticky .hz-pgh-header-inner {
+        top: 46px;
+    }
+}
+
+/* Sticky state specific style changes */
+.hz-pgh-wrapper.is-sticky .hz-pgh-logo img {
+    transform: scale(0.85);
+    transform-origin: left center;
+}
+
+.hz-pgh-wrapper.is-sticky .hz-pgh-nav ul li a,
+.hz-pgh-wrapper.is-sticky .hz-pgh-icons-group a {
+    color: #000;
+    /* Dark text for light sticky background by default. Will be overridden by Elementor settings. */
+}
+
+/* Container */
+.hz-pgh-container {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+/* Logo */
+.hz-pgh-logo {
+    flex: 1 1 20%;
+    display: flex;
+    align-items: center;
+}
+
+.hz-pgh-logo a {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.hz-pgh-logo img {
+    max-height: 40px;
+    width: auto;
+    transition: var(--hz-pgh-transition);
+}
+
+.hz-pgh-logo h2 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* Desktop Navigation */
+.hz-pgh-desktop-nav {
+    flex: 1 1 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.hz-pgh-menu-ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 35px;
+    height: 100%;
+    align-items: center;
+}
+
+.hz-pgh-menu-ul li {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.hz-pgh-menu-ul li a {
+    text-decoration: none;
+    color: var(--hz-pgh-text);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: var(--hz-pgh-transition);
+    position: relative;
+    padding: 10px 0;
+}
+
+/* Underline Animation */
+.hz-pgh-menu-ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    width: 0;
+    height: 1px;
+    background-color: var(--hz-pgh-hover);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.hz-pgh-menu-ul li a:hover {
+    color: var(--hz-pgh-hover);
+    transform: translateY(-2px);
+}
+
+.hz-pgh-menu-ul li a:hover::after,
+.hz-pgh-menu-ul li.current-menu-item>a::after {
+    width: 100%;
+}
+
+/* Submenu Placeholder */
+.hz-pgh-menu-ul li ul.sub-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(15px);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    min-width: 220px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    opacity: 0;
+    transition: all 0.3s ease;
+    visibility: hidden;
+}
+
+.hz-pgh-menu-ul li:hover>ul.sub-menu {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+.hz-pgh-menu-ul li ul.sub-menu li a {
+    color: #333;
+    padding: 8px 0;
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+.hz-pgh-menu-ul li ul.sub-menu li a::after {
+    display: none;
+}
+
+/* Icons Group */
+.hz-pgh-icons-group {
+    flex: 1 1 20%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+}
+
+.hz-pgh-icon-btn {
+    position: relative;
+    color: var(--hz-pgh-text);
+    transition: var(--hz-pgh-transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hz-pgh-icon-btn svg {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+}
+
+.hz-pgh-icon-btn:hover {
+    color: var(--hz-pgh-hover);
+}
+
+.hz-pgh-icon-btn:hover svg {
+    transform: scale(1.1);
+}
+
+/* Badge (Cart/Wishlist) */
+.hz-pgh-badge {
+    position: absolute;
+    top: -6px;
+    right: -8px;
+    background: var(--hz-pgh-hover);
+    color: #000;
+    font-size: 10px;
+    font-weight: 600;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hz-pgh-wrapper.is-sticky .hz-pgh-badge {
+    background: #000;
+    color: #fff;
+}
+
+/* Hamburger */
+.hz-pgh-hamburger {
+    position: relative;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 18px;
+    background: transparent !important;
+    border: none !important;
+    cursor: pointer;
+    padding: 0;
+    z-index: 10001;
+    color: var(--hz-pgh-text);
+    outline: none !important;
+}
+
+.hz-pgh-hamburger-line {
+    width: 100%;
+    height: 2px;
+    background-color: currentColor;
+    transition: all 0.3s ease;
+    transform-origin: center;
+}
+
+.hz-pgh-wrapper.is-sticky .hz-pgh-hamburger-line {
+    background-color: #000;
+}
+
+.hz-pgh-hamburger.is-active .top {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.hz-pgh-hamburger.is-active .middle {
+    opacity: 0;
+}
+
+.hz-pgh-hamburger.is-active .bottom {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Search Overlay */
+.hz-pgh-search-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.98);
+    z-index: 10002;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s ease;
+}
+
+.hz-pgh-search-overlay.is-active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.hz-pgh-search-close {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    background: transparent !important;
+    border: none !important;
+    cursor: pointer;
+    color: #000;
+    transition: transform 0.3s;
+    outline: none !important;
+    padding: 0;
+}
+
+.hz-pgh-search-close:hover {
+    transform: rotate(90deg);
+}
+
+.hz-pgh-search-close svg {
+    width: 32px;
+    height: 32px;
+}
+
+.hz-pgh-search-container {
+    width: 100%;
+    max-width: 800px;
+    padding: 0 40px;
+}
+
+.hz-pgh-search-form {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #000;
+}
+
+.hz-pgh-search-field {
+    width: 100%;
+    border: none;
+    background: transparent;
+    font-size: 36px;
+    font-weight: 300;
+    padding: 20px 0;
+    color: #000;
+    outline: none;
+}
+
+.hz-pgh-search-field::placeholder {
+    color: #ccc;
+}
+
+.hz-pgh-search-submit {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #000;
+}
+
+.hz-pgh-search-submit svg {
+    width: 32px;
+    height: 32px;
+}
+
+/* Mobile Drawer */
+.hz-pgh-mobile-drawer {
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    width: 100vw !important;
+    height: 100% !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    min-height: 100% !important;
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
+    z-index: 999999 !important;
+    pointer-events: none;
+    overscroll-behavior: contain !important;
+}
+
+.hz-pgh-drawer-overlay {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    width: 100vw !important;
+    height: 100% !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    min-height: 100% !important;
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
+    background: rgba(0, 0, 0, 0.5) !important;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    overscroll-behavior: contain !important;
+}
+
+.hz-pgh-mobile-drawer.is-active {
+    pointer-events: auto !important;
+}
+
+.hz-pgh-mobile-drawer.is-active .hz-pgh-drawer-overlay {
+    opacity: 1 !important;
+}
+
+.hz-pgh-drawer-content {
+    position: fixed !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    right: -100%;
+    width: 100% !important;
+    max-width: 400px;
+    height: 100% !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    min-height: 100% !important;
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
+    background: #ffffff !important;
+    transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.15);
+    z-index: 1000000 !important;
+    overflow: hidden !important;
+    overscroll-behavior: contain !important;
+    touch-action: pan-y !important;
+}
+
+.hz-pgh-mobile-drawer.is-active .hz-pgh-drawer-content {
+    right: 0 !important;
+}
+
+.hz-pgh-drawer-header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 24px 30px !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+    background: #ffffff !important;
+    flex-shrink: 0 !important;
+}
+
+.hz-pgh-drawer-header img {
+    max-height: 30px;
+}
+
+.hz-pgh-drawer-header h3 {
+    margin: 0;
+    font-size: 20px;
+    color: #000;
+    font-family: 'Ysabeau Office', sans-serif !important;
+}
+
+.hz-pgh-drawer-close {
+    background: transparent !important;
+    border: none !important;
+    cursor: pointer;
+    color: #000;
+    outline: none !important;
+    padding: 0;
+}
+
+.hz-pgh-drawer-close svg {
+    width: 24px;
+    height: 24px;
+}
+
+.hz-pgh-mobile-nav {
+    flex: 1 1 auto !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding: 24px 30px !important;
+    background: #ffffff !important;
+}
+
+.hz-pgh-mobile-ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Force Ysabeau Office for Mobile Drawer Menu Items */
+.hz-pgh-mobile-drawer,
+.hz-pgh-mobile-drawer *,
+.hz-pgh-drawer-content,
+.hz-pgh-drawer-header,
+.hz-pgh-drawer-header h3,
+.hz-pgh-mobile-nav,
+.hz-pgh-mobile-ul,
+.hz-pgh-mobile-ul li,
+.hz-pgh-mobile-ul li a {
+    font-family: 'Ysabeau Office', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+}
+
+.hz-pgh-mobile-ul li a {
+    text-decoration: none !important;
+    color: #000000 !important;
+    font-family: 'Ysabeau Office', sans-serif !important;
+    font-size: 19px !important;
+    font-weight: 500 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1.5px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 18px 0 !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
+    transition: all 0.3s ease !important;
+}
+
+.hz-pgh-mobile-ul li:last-child a {
+    border-bottom: none !important;
+}
+
+.hz-pgh-mobile-ul li a::after {
+    content: '';
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: rotate(-45deg);
+    opacity: 0.3;
+    transition: all 0.3s ease;
+}
+
+.hz-pgh-mobile-ul li a:hover {
+    color: #666;
+    padding-left: 10px;
+}
+
+.hz-pgh-mobile-ul li a:hover::after {
+    opacity: 1;
+    transform: rotate(-45deg) translate(4px, 4px);
+}
+
+.hz-pgh-mobile-ul li.current-menu-item>a {
+    color: #111111;
+    font-weight: 600 !important;
+}
+
+.hz-pgh-mobile-ul li.current-menu-item>a::after {
+    opacity: 1;
+}
+
+.hz-pgh-drawer-footer {
+    padding: 20px 30px !important;
+    padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px)) !important;
+    border-top: 1px solid rgba(0, 0, 0, 0.08) !important;
+    margin-top: auto !important;
+    background: #ffffff !important;
+    flex-shrink: 0 !important;
+}
+
+.hz-pgh-drawer-icons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 15px;
+}
+
+.hz-pgh-drawer-icons .hz-pgh-icon-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.03);
+    color: #000;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    position: relative;
+}
+
+.hz-pgh-drawer-icons .hz-pgh-icon-btn:hover {
+    background: rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+}
+
+.hz-pgh-drawer-icons .hz-pgh-icon-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.hz-pgh-drawer-icons .hz-pgh-badge {
+    top: 5px;
+    right: 5px;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1024px) {
+    .hz-pgh-desktop-nav {
+        display: none;
+    }
+
+    .hz-pgh-hamburger {
+        display: flex;
+    }
+
+    .hz-pgh-icons-group {
+        gap: 15px;
+    }
+}
+
+@media (max-width: 767px) {
+    .hz-pgh-container {
+        padding: 0 20px;
+    }
+
+    .hz-pgh-announcement {
+        padding: 8px 20px;
+    }
+
+    .hz-pgh-search-field {
+        font-size: 24px;
+    }
+
+    .hz-pgh-drawer-content {
+        max-width: 100% !important;
+        width: 100% !important;
+        left: 0 !important;
+        right: 0 !important;
+        top: 0 !important;
+        bottom: 0 !important;
+        height: 100% !important;
+        height: 100vh !important;
+        height: 100dvh !important;
+        min-height: 100% !important;
+        min-height: 100vh !important;
+        min-height: 100dvh !important;
+    }
+
+    .hz-pgh-wrapper.hz-pgh-hide-icons-mobile .hz-pgh-icon-btn {
+        display: none !important;
+    }
+}

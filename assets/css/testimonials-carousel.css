@@ -1,0 +1,357 @@
+/* Premium Testimonials Carousel */
+.hz-tc-wrapper {
+    width: 100%;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    padding: 20px 0;
+}
+
+.hz-tc-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.hz-tc-small-heading {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #999;
+    margin-bottom: 12px;
+    font-weight: 400;
+}
+
+.hz-tc-main-heading {
+    font-size: 26px;
+    font-weight: 400;
+    color: #111;
+    margin: 0 0 15px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.hz-tc-subtitle {
+    font-size: 14px;
+    color: #555;
+    margin: 0 0 25px;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+
+.hz-tc-divider-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 100px;
+}
+
+.hz-tc-divider-line {
+    width: 100%;
+    height: 1px;
+    background: #e0e0e0;
+}
+
+.hz-tc-divider-icon {
+    max-width: 30px;
+    height: auto;
+}
+
+/* Core Swiper CSS */
+.hz-tc-swiper-container {
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    overflow: hidden;
+    list-style: none;
+    padding: 20px 0 60px;
+    z-index: 1;
+    width: 100%;
+}
+
+.hz-tc-swiper-container .swiper-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: flex;
+    transition-property: transform;
+    box-sizing: content-box;
+    align-items: stretch;
+}
+
+.hz-tc-swiper-container .swiper-slide {
+    flex-shrink: 0;
+    width: 100%;
+    height: auto;
+    /* For equal height cards */
+    position: relative;
+    transition-property: transform;
+    display: flex;
+}
+
+/* Fallback CSS */
+.hz-tc-swiper-container:not(.swiper-initialized) .swiper-wrapper {
+    display: flex;
+    gap: 20px;
+    overflow: hidden;
+}
+
+.hz-tc-swiper-container:not(.swiper-initialized) .swiper-slide {
+    flex: 0 0 calc(33.333% - 13.33px);
+    width: calc(33.333% - 13.33px);
+}
+
+@media (max-width: 1024px) {
+    .hz-tc-swiper-container:not(.swiper-initialized) .swiper-slide {
+        flex: 0 0 calc(50% - 10px);
+        width: calc(50% - 10px);
+    }
+}
+
+@media (max-width: 767px) {
+    .hz-tc-swiper-container:not(.swiper-initialized) .swiper-slide {
+        flex: 0 0 100%;
+        width: 100%;
+    }
+}
+
+/* Card Style - Luxury Minimalist */
+.hz-tc-card {
+    background: transparent;
+    border-radius: 0;
+    padding: 40px 20px;
+    box-shadow: none !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    transition: opacity 0.4s ease;
+    border: none;
+}
+
+.hz-tc-card.hz-tc-glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.hz-tc-card:hover {
+    opacity: 0.9;
+    transform: none;
+    box-shadow: none !important;
+}
+
+.hz-tc-stars {
+    margin: 0 auto 20px;
+    font-size: 14px;
+    color: #e0e0e0;
+    letter-spacing: 4px;
+    display: flex;
+    justify-content: center;
+}
+
+.hz-tc-star.filled {
+    color: #000;
+    /* Deep black for luxury */
+}
+
+.hz-tc-review {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.8;
+    margin-bottom: 35px;
+    flex-grow: 1;
+    font-weight: 300;
+    font-style: normal;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hz-tc-customer-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: auto;
+}
+
+.hz-tc-avatar {
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: #f7f7f7;
+}
+
+.hz-tc-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hz-tc-shape-circle {
+    border-radius: 50%;
+}
+
+.hz-tc-shape-rounded {
+    border-radius: 10px;
+}
+
+.hz-tc-shape-square {
+    border-radius: 0;
+}
+
+.hz-tc-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.hz-tc-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #000;
+    margin: 0 0 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.hz-tc-verified {
+    vertical-align: middle;
+}
+
+.hz-tc-designation {
+    font-size: 12px;
+    color: #888;
+    font-weight: 400;
+}
+
+.hz-tc-company {
+    color: #555;
+}
+
+.hz-tc-location {
+    font-size: 11px;
+    color: #999;
+    margin-top: 2px;
+}
+
+/* Simple Layout */
+.hz-tc-card.hz-tc-style-simple {
+    padding: 20px 25px;
+    align-items: flex-start;
+    text-align: left;
+    border: 1px solid rgba(0, 0, 0, 0.08); /* Soft neutral border by default */
+    background: rgba(255, 255, 255, 0.7); /* Glassy background */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04) !important;
+}
+.hz-tc-card.hz-tc-style-simple .hz-tc-stars {
+    margin: 0 0 12px 0;
+    justify-content: flex-start;
+    color: #eeb926;
+    letter-spacing: 2px;
+    font-size: 20px;
+}
+.hz-tc-card.hz-tc-style-simple .hz-tc-star.filled {
+    color: #eeb926;
+}
+.hz-tc-card.hz-tc-style-simple .hz-tc-star {
+    color: #eeb926;
+}
+.hz-tc-card.hz-tc-style-simple .hz-tc-review {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 12px;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: 400;
+    font-style: normal;
+}
+.hz-tc-card.hz-tc-style-simple .hz-tc-customer-info {
+    align-items: flex-start;
+    margin-top: auto;
+}
+.hz-tc-card.hz-tc-style-simple .hz-tc-meta {
+    align-items: flex-start;
+    text-align: left;
+}
+.hz-tc-card.hz-tc-style-simple .hz-tc-simple-name {
+    font-size: 14px;
+    font-weight: 400;
+    color: #777;
+    text-transform: none;
+    letter-spacing: normal;
+    font-style: italic;
+    margin: 0;
+}
+
+/* Swiper Navigation & Pagination overrides */
+.hz-tc-swiper-container .swiper-button-next,
+.hz-tc-swiper-container .swiper-button-prev {
+    width: 40px;
+    height: 40px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    color: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.hz-tc-swiper-container .swiper-button-next:after,
+.hz-tc-swiper-container .swiper-button-prev:after {
+    display: none;
+    /* Hide default Swiper arrows */
+}
+
+.hz-tc-swiper-container .swiper-button-next svg,
+.hz-tc-swiper-container .swiper-button-prev svg {
+    width: 18px;
+    height: 18px;
+}
+
+.hz-tc-swiper-container .swiper-button-next:hover,
+.hz-tc-swiper-container .swiper-button-prev:hover {
+    background: #111;
+    color: #fff;
+}
+
+.hz-tc-swiper-container .swiper-pagination-bullet {
+    background: #ccc;
+    opacity: 0.5;
+    transition: all 0.3s ease;
+}
+
+.hz-tc-swiper-container .swiper-pagination-bullet-active {
+    background: #111;
+    opacity: 1;
+    width: 20px;
+    border-radius: 10px;
+}
+
+.hz-tc-swiper-container .swiper-pagination-progressbar {
+    background: #f0f0f0;
+}
+
+.hz-tc-swiper-container .swiper-pagination-progressbar .swiper-pagination-progressbar-fill {
+    background: #111;
+}
+
+/* Linear continuous move logic is handled via JS (delay: 0), but we need linear CSS easing */
+.hz-tc-swiper-container.hz-tc-continuous .swiper-wrapper {
+    -webkit-transition-timing-function: linear !important;
+    transition-timing-function: linear !important;
+}

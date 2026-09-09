@@ -1,0 +1,327 @@
+/* Trending Products Tabs Styles */
+.hz-trending-products-wrapper {
+    width: 100%;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.hz-tp-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.hz-tp-small-heading {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #ff5252;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.hz-tp-main-heading {
+    font-size: 36px;
+    font-weight: 300;
+    color: #111;
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+.hz-tp-tabs-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+}
+
+.hz-tp-tab-title {
+    font-size: 16px;
+    color: #999;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.hz-tp-tab-title:hover {
+    color: #555;
+}
+
+.hz-tp-tab-title.hz-tp-active {
+    color: #333;
+    font-weight: 400;
+}
+
+.hz-tp-tab-separator {
+    margin: 0 15px;
+    color: #ccc;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.hz-tp-tabs-content {
+    position: relative;
+    width: 100%;
+}
+
+.hz-tp-tab-pane {
+    display: none;
+    animation: hz-tp-fade-in 0.5s ease;
+}
+
+.hz-tp-tab-pane.hz-tp-active {
+    display: block;
+}
+
+@keyframes hz-tp-fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.hz-tp-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+@media (max-width: 1024px) {
+    .hz-tp-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 767px) {
+    .hz-tp-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 15px;
+        padding-bottom: 15px;
+    }
+    .hz-tp-card {
+        flex: 0 0 85%;
+        scroll-snap-align: center;
+    }
+}
+
+/* Product Card */
+.hz-tp-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.hz-tp-card-image-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    background: #f7f7f7;
+    margin-bottom: 15px;
+}
+
+.hz-tp-image-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.hz-tp-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.hz-tp-image-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    z-index: 1;
+}
+
+.hz-tp-card:hover .hz-tp-image-hover {
+    opacity: 1;
+}
+
+.hz-tp-card:hover .hz-tp-image {
+    transform: scale(1.05);
+}
+
+.hz-tp-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #62d2a2;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 2px;
+    z-index: 2;
+}
+
+.hz-tp-wishlist-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+    z-index: 2;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.hz-tp-wishlist-icon:hover {
+    background: #222;
+    color: #fff;
+}
+
+.hz-tp-wishlist-icon svg {
+    width: 14px;
+    height: 14px;
+}
+
+.hz-tp-wishlist-icon.added svg,
+.hz-tp-wishlist-icon.hz-is-added svg {
+    fill: currentColor;
+}
+
+/* Hide WooCommerce 'View Cart' link that appears after ajax add to cart */
+.added_to_cart.wc-forward {
+    display: none !important;
+}
+
+.hz-tp-card-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.hz-tp-category {
+    font-size: 10px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 4px;
+}
+
+.hz-tp-title {
+    font-size: 14px;
+    font-weight: 400;
+    margin: 0;
+    line-height: 1.4;
+    letter-spacing: 0.5px;
+}
+
+.hz-tp-title a {
+    color: #111;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.hz-tp-title a:hover {
+    color: #888;
+}
+
+.hz-tp-price {
+    font-size: 14px;
+    color: #111;
+    font-weight: 500;
+    margin-top: 2px;
+}
+
+.hz-tp-price del {
+    color: #999;
+    margin-right: 8px;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.hz-tp-price ins {
+    text-decoration: none;
+    color: #ff5252;
+}
+
+/* Rating */
+.hz-tp-rating .star-rating {
+    font-size: 12px;
+    margin: 0 auto;
+}
+
+/* Hide Add to cart button initially */
+.hz-tp-add-to-cart {
+    opacity: 0;
+    transform: translateY(15px);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    margin-top: 15px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.hz-tp-card:hover .hz-tp-add-to-cart {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hz-tp-add-to-cart .button,
+.hz-tp-add-to-cart .added_to_cart {
+    background: #111 !important;
+    color: #fff !important;
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 12px 24px !important;
+    border: 1px solid #111 !important;
+    border-radius: 0 !important;
+    cursor: pointer;
+    transition: all 0.3s ease !important;
+    text-decoration: none !important;
+    display: inline-block;
+    width: 80%;
+    text-align: center;
+    line-height: 1 !important;
+}
+
+.hz-tp-add-to-cart .button.loading,
+.hz-tp-add-to-cart .button.added {
+    color: #fff !important;
+}
+
+.hz-tp-add-to-cart .button:hover,
+.hz-tp-add-to-cart .added_to_cart:hover {
+    background: #fff !important;
+    color: #111 !important;
+}
+
+/* Remove default WC checkmark on added to cart */
+.hz-tp-add-to-cart .button.added::after {
+    display: none !important;
+}
+
+@media (max-width: 767px) {
+    .hz-tp-add-to-cart {
+        opacity: 1;
+        transform: none;
+    }
+    .hz-tp-add-to-cart .button,
+    .hz-tp-add-to-cart .added_to_cart {
+        width: 100%;
+        padding: 10px 15px !important;
+    }
+}

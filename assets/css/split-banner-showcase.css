@@ -1,0 +1,203 @@
+/* Premium Split Banner Showcase */
+.hz-sbs-wrapper {
+    display: flex;
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+    position: relative;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.hz-sbs-panel {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    transition: width 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    cursor: pointer;
+}
+
+/* Background Image Layer */
+.hz-sbs-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: 1;
+}
+
+/* Overlay */
+.hz-sbs-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.05) 100%);
+    z-index: 2;
+    transition: background 0.8s ease, opacity 0.8s ease;
+}
+
+/* Content Container */
+.hz-sbs-content {
+    position: relative;
+    z-index: 3;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    color: #fff;
+}
+
+/* Text Positions */
+.hz-sbs-pos-top-left .hz-sbs-content { justify-content: flex-start; align-items: flex-start; text-align: left; }
+.hz-sbs-pos-center-left .hz-sbs-content { justify-content: center; align-items: flex-start; text-align: left; }
+.hz-sbs-pos-bottom-left .hz-sbs-content { justify-content: flex-end; align-items: flex-start; text-align: left; }
+
+.hz-sbs-pos-top-right .hz-sbs-content { justify-content: flex-start; align-items: flex-end; text-align: right; }
+.hz-sbs-pos-center-right .hz-sbs-content { justify-content: center; align-items: flex-end; text-align: right; }
+.hz-sbs-pos-bottom-right .hz-sbs-content { justify-content: flex-end; align-items: flex-end; text-align: right; }
+
+.hz-sbs-pos-center .hz-sbs-content { justify-content: center; align-items: center; text-align: center; }
+
+/* Typography */
+.hz-sbs-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.hz-sbs-title {
+    font-size: 52px;
+    font-weight: 300;
+    margin: 0 0 25px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #fff;
+    line-height: 1.1;
+}
+
+.hz-sbs-desc {
+    font-size: 14px;
+    font-weight: 300;
+    margin: 0 0 35px;
+    line-height: 1.8;
+    max-width: 80%;
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: 0.5px;
+}
+
+/* Button */
+.hz-sbs-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    padding: 16px 36px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.4);
+    color: #fff;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-decoration: none;
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    opacity: 0.8;
+}
+
+.hz-sbs-btn-icon svg {
+    width: 14px;
+    height: 14px;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.hz-sbs-btn:hover {
+    background: #fff;
+    color: #000;
+    border-color: #fff;
+}
+
+.hz-sbs-btn:hover .hz-sbs-btn-icon svg {
+    transform: translateX(5px);
+}
+
+/* Hover Interactions */
+/* Initial state */
+.hz-sbs-content {
+    transform: translateY(10px);
+    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* When hovering over the entire wrapper */
+.hz-sbs-wrapper:hover .hz-sbs-panel:not(:hover) .hz-sbs-overlay {
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.3) 100%);
+}
+
+.hz-sbs-wrapper:hover .hz-sbs-panel:not(:hover) .hz-sbs-content {
+    opacity: 0.4;
+}
+
+/* When hovering over a specific panel */
+.hz-sbs-panel:hover .hz-sbs-bg {
+    transform: scale(1.08); /* Image zoom */
+}
+
+.hz-sbs-panel:hover .hz-sbs-overlay {
+    background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.1) 100%);
+}
+
+.hz-sbs-panel:hover .hz-sbs-content {
+    transform: translateY(0); /* Text slides upward */
+}
+
+.hz-sbs-panel:hover .hz-sbs-btn {
+    opacity: 1; /* Button becomes fully solid */
+    background: #fff;
+    color: #000;
+    border-color: #fff;
+}
+
+.hz-sbs-panel:hover .hz-sbs-btn-icon svg {
+    transform: translateX(5px);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .hz-sbs-title {
+        font-size: 32px;
+    }
+    .hz-sbs-content {
+        padding: 40px;
+    }
+    .hz-sbs-desc {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 767px) {
+    .hz-sbs-wrapper {
+        flex-direction: column;
+        height: auto;
+    }
+    .hz-sbs-panel {
+        height: 50vh;
+        min-height: 400px;
+    }
+    /* Always show buttons on mobile since hover doesn't exist naturally */
+    .hz-sbs-btn {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .hz-sbs-content {
+        transform: translateY(0);
+        padding: 30px;
+    }
+}

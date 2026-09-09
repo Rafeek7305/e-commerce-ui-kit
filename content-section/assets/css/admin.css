@@ -1,0 +1,60 @@
+#handzom-content-editor-wrapper {
+    background: #fff;
+    padding: 15px;
+    border: 1px solid #ccd0d4;
+}
+.hz-field {
+    margin-bottom: 15px;
+}
+.hz-field label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+.hz-section-wrapper, .hz-subtitle-wrapper {
+    background: #f9f9f9;
+    border: 1px solid #e2e4e7;
+    margin-bottom: 15px;
+}
+.hz-section-header, .hz-subtitle-header {
+    background: #f1f1f1;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e2e4e7;
+}
+.hz-section-header h4 {
+    margin: 0;
+    cursor: move;
+}
+.hz-subtitle-header h5 {
+    margin: 0;
+    cursor: move;
+}
+.hz-actions {
+    display: flex;
+    gap: 10px;
+}
+.hz-section-body, .hz-subtitle-body {
+    padding: 15px;
+}
+.hz-point-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+    cursor: move;
+}
+.hz-point-row input {
+    flex: 1;
+}
+.button-link-delete {
+    color: #a00;
+}
+.button-link-delete:hover {
+    color: #dc3232;
+}
+.hz-add-subtitle, .hz-add-point {
+    margin-top: 10px;
+}

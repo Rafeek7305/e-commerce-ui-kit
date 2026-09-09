@@ -1,0 +1,265 @@
+/* 
+ * Journal Sidebar Styling 
+ * Namespaced strictly to .handzom-journal-sidebar 
+ */
+
+ .handzom-journal-sidebar {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	background-color: #FAF9F6; /* Default, overridden by Elementor */
+	color: #555555;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	box-sizing: border-box;
+}
+
+.handzom-journal-sidebar * {
+	box-sizing: border-box;
+}
+
+/* Sections */
+.handzom-journal-sidebar__section {
+	padding: 30px;
+	border-bottom: 1px solid #EAE8E3;
+}
+
+.handzom-journal-sidebar__section:last-child {
+	border-bottom: none;
+}
+
+/* Titles */
+.handzom-journal-sidebar__title {
+	font-size: 11px;
+	text-transform: uppercase;
+	letter-spacing: 1.5px;
+	font-weight: 500;
+	color: #333333;
+	margin: 0 0 20px 0;
+	line-height: 1.2;
+}
+
+/* Descriptions */
+.handzom-journal-sidebar__desc {
+	font-size: 14px;
+	line-height: 1.6;
+	margin-bottom: 20px;
+}
+
+/* Links */
+.handzom-journal-sidebar a {
+	text-decoration: none;
+	color: #111111;
+	transition: color 0.3s ease;
+}
+
+.handzom-journal-sidebar a:hover {
+	color: #555555;
+}
+
+/* Block 1: In This Journal */
+.handzom-journal-sidebar__list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.handzom-journal-sidebar__item {
+	margin-bottom: 15px;
+}
+
+.handzom-journal-sidebar__item:last-child {
+	margin-bottom: 0;
+}
+
+.handzom-journal-sidebar__link {
+	display: flex;
+	align-items: flex-start;
+	font-size: 14px;
+	line-height: 1.5;
+}
+
+.handzom-journal-sidebar__item.is-active .handzom-journal-sidebar__link {
+	font-weight: 600;
+	color: #000;
+}
+
+.handzom-journal-sidebar__number {
+	font-size: 11px;
+	color: #888888;
+	margin-right: 12px;
+	margin-top: 2px;
+	min-width: 15px;
+}
+
+/* Block 2: Our Story */
+.handzom-journal-sidebar__image-wrap {
+	width: 100%;
+	margin-bottom: 20px;
+	overflow: hidden;
+}
+
+.handzom-journal-sidebar__img {
+	width: 100%;
+	height: auto;
+	display: block;
+	object-fit: cover;
+	transition: transform 0.5s ease;
+}
+
+.handzom-journal-sidebar__story:hover .handzom-journal-sidebar__img {
+	transform: scale(1.02);
+}
+
+.handzom-journal-sidebar__button {
+	display: inline-flex;
+	align-items: center;
+	font-size: 11px;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-weight: 600;
+	color: #111;
+	border-bottom: 1px solid #111;
+	padding-bottom: 2px;
+}
+
+.handzom-journal-sidebar__button:hover {
+	color: #555;
+	border-bottom-color: #555;
+}
+
+.handzom-journal-sidebar__arrow {
+	margin-left: 8px;
+	font-size: 12px;
+	transition: transform 0.3s ease;
+}
+
+.handzom-journal-sidebar__button:hover .handzom-journal-sidebar__arrow {
+	transform: translateX(4px);
+}
+
+/* Block 3: Categories */
+.handzom-journal-sidebar__cat-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+
+.handzom-journal-sidebar__cat-item {
+	margin: 0;
+}
+
+.handzom-journal-sidebar__cat-link {
+	font-size: 14px;
+	font-weight: 500;
+	color: #333333;
+	text-decoration: none;
+	transition: color 0.3s ease;
+}
+
+.handzom-journal-sidebar__cat-link:hover {
+	color: #000;
+}
+
+/* Block 4: Latest Articles */
+.handzom-journal-sidebar__articles-list {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.handzom-journal-sidebar__article {
+	display: flex;
+	align-items: flex-start;
+	gap: 15px;
+}
+
+.handzom-journal-sidebar__article-img-wrap {
+	flex: 0 0 60px;
+	width: 60px;
+	height: 80px;
+	overflow: hidden;
+}
+
+.handzom-journal-sidebar__article-img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+	transition: transform 0.4s ease;
+}
+
+.handzom-journal-sidebar__article:hover .handzom-journal-sidebar__article-img {
+	transform: scale(1.05);
+}
+
+.handzom-journal-sidebar__article-content {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.handzom-journal-sidebar__article-title {
+	margin: 0;
+	font-size: 13px;
+	font-weight: 500;
+	line-height: 1.4;
+	color: #333333;
+}
+
+.handzom-journal-sidebar__date {
+	font-size: 11px;
+	color: #888888;
+}
+
+/* Block 4: Stay In The Loop */
+.handzom-journal-sidebar__form {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.handzom-journal-sidebar__input {
+	width: 100%;
+	padding: 12px 15px;
+	border: 1px solid #EAE8E3;
+	background: transparent;
+	font-size: 13px;
+	color: #333;
+	outline: none;
+	transition: border-color 0.3s ease;
+	font-family: inherit;
+}
+
+.handzom-journal-sidebar__input:focus {
+	border-color: #111;
+}
+
+.handzom-journal-sidebar__submit {
+	width: 100%;
+	padding: 12px 20px;
+	background: #111;
+	color: #fff;
+	border: none;
+	font-size: 11px;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: background 0.3s ease, color 0.3s ease;
+	font-family: inherit;
+}
+
+.handzom-journal-sidebar__submit:hover {
+	background: #333;
+}
+
+/* Responsive Overrides */
+@media (max-width: 768px) {
+	.handzom-journal-sidebar__section {
+		padding: 25px 20px;
+	}
+}

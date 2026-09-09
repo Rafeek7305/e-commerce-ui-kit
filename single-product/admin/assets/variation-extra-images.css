@@ -1,0 +1,114 @@
+/* ==========================================================================
+   VARIATION EXTRA IMAGES - WP ADMIN STYLING
+   Scoped strictly to .hzsp-variation-extra-images-wrap and .hzsp-vei-*
+   ========================================================================== */
+
+.hzsp-variation-extra-images-wrap {
+  margin-top: 15px;
+  padding: 12px 15px;
+  background: #f9f9f9;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  clear: both;
+}
+
+.hzsp-vei-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.hzsp-vei-title {
+  margin: 0 !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #1d2327 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.hzsp-vei-add-btn {
+  margin: 0 !important;
+}
+
+.hzsp-vei-empty-msg {
+  margin: 6px 0 !important;
+  font-size: 12px !important;
+  color: #646970 !important;
+  font-style: italic;
+}
+
+.hzsp-vei-thumbnails {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+  min-height: 20px;
+}
+
+.hzsp-vei-thumb {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  border: 1px solid #ccd0d4;
+  border-radius: 4px;
+  background: #ffffff;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  cursor: grab;
+  user-select: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hzsp-vei-thumb:hover {
+  border-color: #2271b1;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.12);
+}
+
+.hzsp-vei-thumb:active {
+  cursor: grabbing;
+}
+
+.hzsp-vei-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hzsp-vei-remove-btn {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(204, 0, 0, 0.85);
+  color: #ffffff !important;
+  font-size: 13px !important;
+  line-height: 16px !important;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, transform 0.15s ease;
+  z-index: 2;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.hzsp-vei-remove-btn:hover {
+  background: #cc0000;
+  transform: scale(1.1);
+}
+
+.hzsp-vei-thumb-placeholder {
+  width: 64px;
+  height: 64px;
+  border: 2px dashed #2271b1;
+  border-radius: 4px;
+  background: #f0f6fc;
+}
