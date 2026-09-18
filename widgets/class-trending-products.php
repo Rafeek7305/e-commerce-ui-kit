@@ -273,7 +273,7 @@ class Trending_Products extends Widget_Base
 			\Elementor\Group_Control_Image_Size::get_type(),
 			[
 				'name' => 'image',
-				'default' => 'woocommerce_thumbnail',
+				'default' => 'full',
 				'label' => esc_html__('Image Size', 'handzom-ui-kit'),
 			]
 		);
@@ -294,6 +294,56 @@ class Trending_Products extends Widget_Base
 				],
 				'selectors' => [
 					'{{WRAPPER}} .hz-tp-card-image-wrap' => 'aspect-ratio: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'custom_image_ratio',
+			[
+				'label' => esc_html__('Custom Ratio (e.g. 3/4 or 2/3)', 'handzom-ui-kit'),
+				'type' => Controls_Manager::TEXT,
+				'default' => '3/4',
+				'condition' => [
+					'image_ratio' => 'custom',
+				],
+				'selectors' => [
+					'{{WRAPPER}} .hz-tp-card-image-wrap' => 'aspect-ratio: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'image_fit',
+			[
+				'label' => esc_html__('Image Fit', 'handzom-ui-kit'),
+				'type' => Controls_Manager::SELECT,
+				'default' => 'cover',
+				'options' => [
+					'cover' => esc_html__('Cover (Fill Card View)', 'handzom-ui-kit'),
+					'contain' => esc_html__('Contain (Full Image View)', 'handzom-ui-kit'),
+					'fill' => esc_html__('Fill / Stretch', 'handzom-ui-kit'),
+				],
+				'selectors' => [
+					'{{WRAPPER}} .hz-tp-image' => 'object-fit: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'image_position',
+			[
+				'label' => esc_html__('Image Focus / Position', 'handzom-ui-kit'),
+				'type' => Controls_Manager::SELECT,
+				'default' => 'top center',
+				'description' => esc_html__('Top Center ensures model heads and faces are fully preserved.', 'handzom-ui-kit'),
+				'options' => [
+					'top center' => esc_html__('Top Center (Apparel / Models - Best)', 'handzom-ui-kit'),
+					'center center' => esc_html__('Center Center', 'handzom-ui-kit'),
+					'bottom center' => esc_html__('Bottom Center', 'handzom-ui-kit'),
+				],
+				'selectors' => [
+					'{{WRAPPER}} .hz-tp-image' => 'object-position: {{VALUE}} !important;',
 				],
 			]
 		);
@@ -447,7 +497,12 @@ class Trending_Products extends Widget_Base
 
 	private function render_product_card($product, $settings)
 	{
-		$image_size = isset($settings['image_size']) ? $settings['image_size'] : 'woocommerce_thumbnail';
+		$configured_size = !empty($settings['image_size']) ? $settings['image_size'] : (!empty($settings['image_size_size']) ? $settings['image_size_size'] : '');
+		if (empty($configured_size) || 'woocommerce_thumbnail' === $configured_size) {
+			$image_size = 'full';
+		} else {
+			$image_size = $configured_size;
+		}
 		?>
 		<div class="hz-tp-card">
 			<div class="hz-tp-card-image-wrap">

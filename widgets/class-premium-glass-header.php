@@ -92,6 +92,23 @@ class Premium_Glass_Header extends Widget_Base
 			]
 		);
 
+		$this->add_control(
+			'logo_link',
+			[
+				'label' => esc_html__('Logo Link', 'handzom-ui-kit'),
+				'type' => Controls_Manager::URL,
+				'dynamic' => [
+					'active' => true,
+				],
+				'placeholder' => esc_html__('https://your-link.com', 'handzom-ui-kit'),
+				'default' => [
+					'url' => '',
+					'is_external' => false,
+					'nofollow' => false,
+				],
+			]
+		);
+
 		$this->end_controls_section();
 
 		// ==========================================
@@ -494,6 +511,28 @@ class Premium_Glass_Header extends Widget_Base
 		$is_overlay = ($settings['overlay_header'] === 'yes') ? 'hz-pgh-overlay' : '';
 		$wrapper_classes = implode(' ', array_filter([$has_sticky_logo, $hide_icons_mobile, $is_overlay]));
 
+		// Setup Logo URL & Link Attributes
+		$logo_url = home_url('/');
+		$logo_link_attrs = '';
+		if (!empty($settings['logo_link']['url'])) {
+			$logo_url = $settings['logo_link']['url'];
+			if (!empty($settings['logo_link']['is_external'])) {
+				$logo_link_attrs .= ' target="_blank"';
+			}
+			if (!empty($settings['logo_link']['nofollow'])) {
+				$logo_link_attrs .= ' rel="nofollow"';
+			}
+			if (!empty($settings['logo_link']['custom_attributes'])) {
+				$custom_attrs = explode(',', $settings['logo_link']['custom_attributes']);
+				foreach ($custom_attrs as $attr) {
+					$attr_parts = explode('|', $attr);
+					if (count($attr_parts) === 2) {
+						$logo_link_attrs .= ' ' . esc_attr(trim($attr_parts[0])) . '="' . esc_attr(trim($attr_parts[1])) . '"';
+					}
+				}
+			}
+		}
+
 		// HTML Structure
 		?>
 		<style>
@@ -638,7 +677,7 @@ class Premium_Glass_Header extends Widget_Base
 
 					<!-- Left: Logo -->
 					<div class="hz-pgh-logo">
-						<a href="<?php echo esc_url(home_url('/')); ?>">
+						<a href="<?php echo esc_url($logo_url); ?>"<?php echo $logo_link_attrs; ?>>
 							<?php if (!empty($settings['logo_image']['url'])): ?>
 								<img src="<?php echo esc_url($settings['logo_image']['url']); ?>" class="hz-pgh-normal-logo"
 									alt="<?php echo esc_attr(get_bloginfo('name')); ?>">
@@ -736,12 +775,14 @@ class Premium_Glass_Header extends Widget_Base
 				<div class="hz-pgh-drawer-overlay"></div>
 				<div class="hz-pgh-drawer-content">
 					<div class="hz-pgh-drawer-header">
-						<?php if (!empty($settings['logo_image']['url'])): ?>
-							<img src="<?php echo esc_url($settings['logo_image']['url']); ?>"
-								alt="<?php echo esc_attr(get_bloginfo('name')); ?>">
-						<?php else: ?>
-							<h3><?php echo esc_html(get_bloginfo('name')); ?></h3>
-						<?php endif; ?>
+						<a href="<?php echo esc_url($logo_url); ?>"<?php echo $logo_link_attrs; ?> style="display:inline-flex;align-items:center;text-decoration:none;">
+							<?php if (!empty($settings['logo_image']['url'])): ?>
+								<img src="<?php echo esc_url($settings['logo_image']['url']); ?>"
+									alt="<?php echo esc_attr(get_bloginfo('name')); ?>">
+							<?php else: ?>
+								<h3><?php echo esc_html(get_bloginfo('name')); ?></h3>
+							<?php endif; ?>
+						</a>
 						<button class="hz-pgh-drawer-close">
 							<svg style="width: 24px; height: 24px; min-width: 24px;" viewBox="0 0 24 24" fill="none"
 								stroke="currentColor" stroke-width="2">
