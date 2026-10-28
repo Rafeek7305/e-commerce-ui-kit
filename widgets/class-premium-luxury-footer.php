@@ -884,6 +884,192 @@ class Premium_Luxury_Footer extends Widget_Base
 		$year = date('Y');
 		$copyright = str_replace('{Year}', $year, $settings['copyright_text']);
 		?>
+		<style>
+			/* Critical CSS to prevent FOUC (Flash of Unstyled Content) */
+			.hz-plf-wrapper {
+				position: relative;
+				background: #ffffff;
+				padding: 80px 5% 40px;
+				color: #666666;
+				overflow: hidden;
+			}
+			.hz-plf-wrapper *, .hz-plf-wrapper *::before, .hz-plf-wrapper *::after {
+				box-sizing: border-box;
+			}
+			.hz-plf-container {
+				max-width: 1400px;
+				margin: 0 auto;
+				position: relative;
+			}
+			.hz-plf-newsletter-row {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding-bottom: 60px;
+				margin-bottom: 60px;
+				border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+				gap: 40px;
+			}
+			.hz-plf-nl-content h3 {
+				margin: 0 0 10px;
+				font-size: 28px;
+				font-weight: 300;
+				color: #111111;
+			}
+			.hz-plf-nl-form {
+				flex: 1;
+				max-width: 500px;
+			}
+			.hz-plf-form-basic {
+				display: flex;
+				gap: 10px;
+			}
+			.hz-plf-form-basic input {
+				flex: 1;
+				padding: 15px 20px;
+				border: 1px solid rgba(0, 0, 0, 0.05);
+				border-radius: 4px;
+			}
+			.hz-plf-form-basic button {
+				padding: 15px 30px;
+				background: #111111;
+				color: #fff;
+				border: none;
+				border-radius: 4px;
+			}
+			.hz-plf-main-row {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: space-between;
+				gap: 40px;
+				margin-bottom: 60px;
+			}
+			.hz-plf-brand-col {
+				flex: 0 1 300px;
+				margin-right: 5%;
+			}
+			.hz-plf-brand-col .hz-plf-logo {
+				max-height: 40px;
+				margin-bottom: 25px;
+				display: block;
+			}
+			.hz-plf-col {
+				flex: 1;
+			}
+			.hz-plf-col-title {
+				font-size: 14px;
+				font-weight: 600;
+				letter-spacing: 1px;
+				text-transform: uppercase;
+				color: #111111;
+				margin: 0 0 25px;
+			}
+			.hz-plf-menu,
+			.hz-plf-contact-list {
+				list-style: none !important;
+				margin: 0 !important;
+				padding: 0 !important;
+			}
+			.hz-plf-menu li,
+			.hz-plf-contact-list li {
+				list-style: none !important;
+				margin-bottom: 15px;
+			}
+			.hz-plf-menu li a {
+				text-decoration: none !important;
+				color: #666666;
+			}
+			.hz-plf-contact-list li {
+				display: flex;
+				align-items: flex-start;
+				gap: 15px;
+			}
+			.hz-plf-socials {
+				display: flex;
+				gap: 15px;
+			}
+			.hz-plf-socials a {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 40px;
+				height: 40px;
+				border-radius: 50%;
+				background: rgba(0, 0, 0, 0.05);
+				color: #111111;
+				text-decoration: none;
+			}
+			.hz-plf-bottom-bar {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding-top: 30px;
+				border-top: 1px solid rgba(0, 0, 0, 0.05);
+			}
+			@media (max-width: 1024px) {
+				.hz-plf-newsletter-row {
+					flex-direction: column;
+					text-align: center;
+				}
+				.hz-plf-main-row {
+					justify-content: center;
+				}
+				.hz-plf-brand-col,
+				.hz-plf-contact-col {
+					flex: 1 1 100%;
+				}
+				.hz-plf-brand-col {
+					text-align: center;
+					margin-right: 0;
+				}
+				.hz-plf-brand-col .hz-plf-logo {
+					margin-left: auto;
+					margin-right: auto;
+				}
+				.hz-plf-socials {
+					justify-content: center;
+				}
+			}
+			@media (max-width: 768px) {
+				.hz-plf-main-row {
+					flex-direction: column;
+					align-items: center;
+					gap: 30px;
+					text-align: center;
+				}
+				.hz-plf-menu-col,
+				.hz-plf-contact-col {
+					flex: 1 1 100%;
+					width: 100%;
+					text-align: left;
+				}
+				.hz-plf-menu-col .hz-plf-col-title,
+				.hz-plf-contact-col .hz-plf-col-title {
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+					padding-bottom: 15px;
+					margin-bottom: 0;
+				}
+				.hz-plf-menu-col .hz-plf-menu,
+				.hz-plf-contact-col .hz-plf-contact-list {
+					display: none;
+					padding-top: 15px;
+					padding-bottom: 15px;
+				}
+				.hz-plf-bottom-bar {
+					flex-direction: column;
+					gap: 20px;
+					text-align: center;
+				}
+			}
+			@media (min-width: 769px) {
+				.hz-plf-menu-col .hz-plf-menu {
+					display: block !important;
+				}
+			}
+		</style>
 		<div class="hz-plf-wrapper">
 			<div class="hz-plf-container">
 

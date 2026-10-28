@@ -67,6 +67,11 @@ class Trending_Products extends Widget_Base
 				'label' => esc_html__('Small Heading', 'handzom-ui-kit'),
 				'type' => Controls_Manager::TEXT,
 				'default' => esc_html__('STAY AHEAD OF THE FASHION CURVE', 'handzom-ui-kit'),
+				'placeholder' => esc_html__('Enter small heading', 'handzom-ui-kit'),
+				'label_block' => true,
+				'dynamic' => [
+					'active' => true,
+				],
 			]
 		);
 
@@ -76,6 +81,11 @@ class Trending_Products extends Widget_Base
 				'label' => esc_html__('Main Heading', 'handzom-ui-kit'),
 				'type' => Controls_Manager::TEXT,
 				'default' => esc_html__('Trending Products', 'handzom-ui-kit'),
+				'placeholder' => esc_html__('Enter main heading', 'handzom-ui-kit'),
+				'label_block' => true,
+				'dynamic' => [
+					'active' => true,
+				],
 			]
 		);
 
@@ -174,23 +184,38 @@ class Trending_Products extends Widget_Base
 			]
 		);
 
-		$this->add_control(
-			'heading_color',
+		$this->add_responsive_control(
+			'header_align',
 			[
-				'label' => esc_html__('Main Heading Color', 'handzom-ui-kit'),
-				'type' => Controls_Manager::COLOR,
+				'label' => esc_html__('Alignment', 'handzom-ui-kit'),
+				'type' => Controls_Manager::CHOOSE,
+				'options' => [
+					'left' => [
+						'title' => esc_html__('Left', 'handzom-ui-kit'),
+						'icon' => 'eicon-text-align-left',
+					],
+					'center' => [
+						'title' => esc_html__('Center', 'handzom-ui-kit'),
+						'icon' => 'eicon-text-align-center',
+					],
+					'right' => [
+						'title' => esc_html__('Right', 'handzom-ui-kit'),
+						'icon' => 'eicon-text-align-right',
+					],
+				],
+				'default' => 'center',
 				'selectors' => [
-					'{{WRAPPER}} .hz-tp-main-heading' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .hz-tp-header' => 'text-align: {{VALUE}};',
 				],
 			]
 		);
 
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
+		$this->add_control(
+			'small_heading_style_title',
 			[
-				'name' => 'heading_typography',
-				'label' => esc_html__('Main Heading Typography', 'handzom-ui-kit'),
-				'selector' => '{{WRAPPER}} .hz-tp-main-heading',
+				'label' => esc_html__('Small Heading', 'handzom-ui-kit'),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before',
 			]
 		);
 
@@ -199,8 +224,11 @@ class Trending_Products extends Widget_Base
 			[
 				'label' => esc_html__('Small Heading Color', 'handzom-ui-kit'),
 				'type' => Controls_Manager::COLOR,
+				'default' => '#ff5252',
 				'selectors' => [
-					'{{WRAPPER}} .hz-tp-small-heading' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .hz-tp-small-heading' => 'color: {{VALUE}} !important;',
+					'{{WRAPPER}} h5.hz-tp-small-heading' => 'color: {{VALUE}} !important;',
+					'{{WRAPPER}} .hz-tp-header .hz-tp-small-heading' => 'color: {{VALUE}} !important;',
 				],
 			]
 		);
@@ -210,7 +238,85 @@ class Trending_Products extends Widget_Base
 			[
 				'name' => 'small_heading_typography',
 				'label' => esc_html__('Small Heading Typography', 'handzom-ui-kit'),
-				'selector' => '{{WRAPPER}} .hz-tp-small-heading',
+				'selector' => '{{WRAPPER}} .hz-tp-small-heading, {{WRAPPER}} h5.hz-tp-small-heading, {{WRAPPER}} .hz-tp-header .hz-tp-small-heading',
+			]
+		);
+
+		$this->add_responsive_control(
+			'small_heading_spacing',
+			[
+				'label' => esc_html__('Bottom Spacing', 'handzom-ui-kit'),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => ['px', 'em', 'rem'],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 60,
+						'step' => 1,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => 10,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .hz-tp-small-heading' => 'margin-bottom: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'main_heading_style_title',
+			[
+				'label' => esc_html__('Main Heading', 'handzom-ui-kit'),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'heading_color',
+			[
+				'label' => esc_html__('Main Heading Color', 'handzom-ui-kit'),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#111111',
+				'selectors' => [
+					'{{WRAPPER}} .hz-tp-main-heading' => 'color: {{VALUE}} !important;',
+					'{{WRAPPER}} h2.hz-tp-main-heading' => 'color: {{VALUE}} !important;',
+					'{{WRAPPER}} .hz-tp-header .hz-tp-main-heading' => 'color: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name' => 'heading_typography',
+				'label' => esc_html__('Main Heading Typography', 'handzom-ui-kit'),
+				'selector' => '{{WRAPPER}} .hz-tp-main-heading, {{WRAPPER}} h2.hz-tp-main-heading, {{WRAPPER}} .hz-tp-header .hz-tp-main-heading',
+			]
+		);
+
+		$this->add_responsive_control(
+			'header_bottom_spacing',
+			[
+				'label' => esc_html__('Header Bottom Spacing', 'handzom-ui-kit'),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => ['px', 'em', 'rem'],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 100,
+						'step' => 1,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => 30,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .hz-tp-header' => 'margin-bottom: {{SIZE}}{{UNIT}};',
+				],
 			]
 		);
 
@@ -266,6 +372,14 @@ class Trending_Products extends Widget_Base
 			[
 				'label' => esc_html__('Product Card', 'handzom-ui-kit'),
 				'tab' => Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->add_control(
+			'card_image_heading',
+			[
+				'label' => esc_html__('Image', 'handzom-ui-kit'),
+				'type' => Controls_Manager::HEADING,
 			]
 		);
 
@@ -363,6 +477,206 @@ class Trending_Products extends Widget_Base
 				'selectors' => [
 					'{{WRAPPER}} .hz-tp-card-image-wrap' => 'height: {{SIZE}}{{UNIT}}; aspect-ratio: auto;',
 					'{{WRAPPER}} .hz-tp-image' => 'height: 100%; object-fit: cover;',
+				],
+			]
+		);
+
+		/* --- Category Style --- */
+		$this->add_control(
+			'card_category_heading',
+			[
+				'label' => esc_html__('Category', 'handzom-ui-kit'),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'card_category_color',
+			[
+				'label' => esc_html__('Category Color', 'handzom-ui-kit'),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#888888',
+				'selectors' => [
+					'{{WRAPPER}} .hz-tp-category' => 'color: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name' => 'card_category_typography',
+				'label' => esc_html__('Category Typography', 'handzom-ui-kit'),
+				'selector' => '{{WRAPPER}} .hz-tp-category',
+			]
+		);
+
+		/* --- Product Title Style --- */
+		$this->add_control(
+			'card_title_heading',
+			[
+				'label' => esc_html__('Product Title', 'handzom-ui-kit'),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'card_title_color',
+			[
+				'label' => esc_html__('Title Color', 'handzom-ui-kit'),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#111111',
+				'selectors' => [
+					'{{WRAPPER}} .hz-tp-title, {{WRAPPER}} .hz-tp-title a' => 'color: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'card_title_hover_color',
+			[
+				'label' => esc_html__('Title Hover Color', 'handzom-ui-kit'),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#888888',
+				'selectors' => [
+					'{{WRAPPER}} .hz-tp-title a:hover' => 'color: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name' => 'card_title_typography',
+				'label' => esc_html__('Title Typography', 'handzom-ui-kit'),
+				'selector' => '{{WRAPPER}} .hz-tp-title, {{WRAPPER}} .hz-tp-title a',
+			]
+		);
+
+		$this->add_responsive_control(
+			'card_title_spacing',
+			[
+				'label' => esc_html__('Title Bottom Spacing', 'handzom-ui-kit'),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => ['px', 'em', 'rem'],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 40,
+						'step' => 1,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .hz-tp-title' => 'margin-bottom: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		/* --- Price Style --- */
+		$this->add_control(
+			'card_price_heading',
+			[
+				'label' => esc_html__('Price', 'handzom-ui-kit'),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'card_price_color',
+			[
+				'label' => esc_html__('Price Color', 'handzom-ui-kit'),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#111111',
+				'selectors' => [
+					'{{WRAPPER}} .hz-tp-price, {{WRAPPER}} .hz-tp-price .woocommerce-Price-amount, {{WRAPPER}} .hz-tp-price .woocommerce-Price-amount bdi' => 'color: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'card_sale_price_color',
+			[
+				'label' => esc_html__('Sale Price Color', 'handzom-ui-kit'),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#ff5252',
+				'selectors' => [
+					'{{WRAPPER}} .hz-tp-price ins, {{WRAPPER}} .hz-tp-price ins .woocommerce-Price-amount, {{WRAPPER}} .hz-tp-price ins .woocommerce-Price-amount bdi' => 'color: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'card_regular_price_color',
+			[
+				'label' => esc_html__('Regular Price Color', 'handzom-ui-kit'),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#999999',
+				'selectors' => [
+					'{{WRAPPER}} .hz-tp-price del, {{WRAPPER}} .hz-tp-price del .woocommerce-Price-amount, {{WRAPPER}} .hz-tp-price del .woocommerce-Price-amount bdi' => 'color: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name' => 'card_price_typography',
+				'label' => esc_html__('Price Typography', 'handzom-ui-kit'),
+				'selector' => '{{WRAPPER}} .hz-tp-price, {{WRAPPER}} .hz-tp-price .woocommerce-Price-amount, {{WRAPPER}} .hz-tp-price ins, {{WRAPPER}} .hz-tp-price del',
+			]
+		);
+
+		$this->add_responsive_control(
+			'card_price_spacing',
+			[
+				'label' => esc_html__('Price Top Spacing', 'handzom-ui-kit'),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => ['px', 'em', 'rem'],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 40,
+						'step' => 1,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .hz-tp-price' => 'margin-top: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		/* --- Content Alignment --- */
+		$this->add_responsive_control(
+			'card_content_alignment',
+			[
+				'label' => esc_html__('Alignment', 'handzom-ui-kit'),
+				'type' => Controls_Manager::CHOOSE,
+				'options' => [
+					'left' => [
+						'title' => esc_html__('Left', 'handzom-ui-kit'),
+						'icon' => 'eicon-text-align-left',
+					],
+					'center' => [
+						'title' => esc_html__('Center', 'handzom-ui-kit'),
+						'icon' => 'eicon-text-align-center',
+					],
+					'right' => [
+						'title' => esc_html__('Right', 'handzom-ui-kit'),
+						'icon' => 'eicon-text-align-right',
+					],
+				],
+				'default' => 'center',
+				'separator' => 'before',
+				'selectors_dictionary' => [
+					'left' => 'text-align: left; align-items: flex-start;',
+					'center' => 'text-align: center; align-items: center;',
+					'right' => 'text-align: right; align-items: flex-end;',
+				],
+				'selectors' => [
+					'{{WRAPPER}} .hz-tp-card-content' => '{{VALUE}}',
 				],
 			]
 		);

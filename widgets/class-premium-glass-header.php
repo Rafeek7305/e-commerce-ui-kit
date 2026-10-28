@@ -503,10 +503,50 @@ class Premium_Glass_Header extends Widget_Base
 		$settings = $this->get_settings_for_display();
 		$menu_slug = $settings['menu_select'];
 
-		// Setup WooCommerce flags
+		// Setup WooCommerce flags & URLs
 		$is_woocommerce_active = class_exists('WooCommerce');
+		$account_url = '';
+		if ($is_woocommerce_active && function_exists('wc_get_page_permalink')) {
+			$wc_account_url = wc_get_page_permalink('myaccount');
+			if (!empty($wc_account_url)) {
+				$account_url = $wc_account_url;
+			}
+		} elseif (function_exists('get_permalink') && ($myaccount_page_id = get_option('woocommerce_myaccount_page_id'))) {
+			$myaccount_permalink = get_permalink($myaccount_page_id);
+			if (!empty($myaccount_permalink)) {
+				$account_url = $myaccount_permalink;
+			}
+		}
+		if (empty($account_url) || $account_url === '#') {
+			$account_url = home_url('/my-account/');
+		}
 
-		$has_sticky_logo = !empty($settings['sticky_logo_image']['url']) ? 'has-sticky-logo' : '';
+		// Wishlist URL
+		$wishlist_url = '#';
+		if (function_exists('YITH_WCWL') && method_exists(YITH_WCWL(), 'get_wishlist_url')) {
+			$wishlist_url = YITH_WCWL()->get_wishlist_url();
+		} elseif (function_exists('tinv_url_wishlist_default')) {
+			$wishlist_url = tinv_url_wishlist_default();
+		} elseif ($wl_page_id = get_option('yith_wcwl_wishlist_page_id')) {
+			$wishlist_url = get_permalink($wl_page_id);
+		} elseif (function_exists('get_page_by_path') && ($wl_page = get_page_by_path('wishlist'))) {
+			$wishlist_url = get_permalink($wl_page);
+		}
+
+		// Cart URL & Count
+		$cart_count = 0;
+		$cart_url = home_url('/cart/');
+		if ($is_woocommerce_active) {
+			if (function_exists('wc_get_cart_url')) {
+				$cart_url = wc_get_cart_url();
+			}
+			if (!is_null(WC()->cart)) {
+				$cart_count = WC()->cart->get_cart_contents_count();
+			}
+		}
+
+		$has_distinct_sticky_logo = (!empty($settings['sticky_logo_image']['url']) && $settings['sticky_logo_image']['url'] !== ($settings['logo_image']['url'] ?? ''));
+		$has_sticky_logo = $has_distinct_sticky_logo ? 'has-sticky-logo' : '';
 		$hide_icons_mobile = ($settings['hide_icons_on_mobile'] === 'yes') ? 'hz-pgh-hide-icons-mobile' : '';
 		$is_overlay = ($settings['overlay_header'] === 'yes') ? 'hz-pgh-overlay' : '';
 		$wrapper_classes = implode(' ', array_filter([$has_sticky_logo, $hide_icons_mobile, $is_overlay]));
@@ -549,68 +589,14 @@ class Premium_Glass_Header extends Widget_Base
 				left: 0;
 			}
 
-			.hz-pgh-mobile-drawer {
-				position: fixed;
-				top: 0;
-				left: 0;
-				right: 0;
-				bottom: 0;
+			.hz-pgh-header-inner {
+				position: relative;
 				width: 100%;
-				height: 100%;
-				height: 100vh;
-				height: 100dvh;
-				min-height: 100%;
-				min-height: 100vh;
-				min-height: 100dvh;
-				opacity: 0;
-				pointer-events: none;
-				transition: opacity 0.4s ease;
-				z-index: 999999;
-			}
-
-			.hz-pgh-mobile-drawer.is-active {
-				opacity: 1;
-				pointer-events: auto;
-			}
-
-			.hz-pgh-drawer-content {
-				position: fixed;
-				top: 0;
-				bottom: 0;
-				right: -100%;
-				width: 100%;
-				max-width: 400px;
-				height: 100%;
-				height: 100vh;
-				height: 100dvh;
-				min-height: 100%;
-				min-height: 100vh;
-				min-height: 100dvh;
-				background: #ffffff;
-			}
-
-			.hz-pgh-mobile-drawer,
-			.hz-pgh-mobile-drawer *,
-			.hz-pgh-mobile-ul li a {
-				font-family: 'Ysabeau Office', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-			}
-
-			.hz-pgh-search-overlay {
-				position: fixed;
-				opacity: 0;
-				pointer-events: none;
-			}
-
-			.hz-pgh-menu-ul,
-			.hz-pgh-mobile-ul {
-				list-style: none;
-				margin: 0;
-				padding: 0;
+				height: 70px;
+				z-index: 10001;
+				background: transparent;
 				display: flex;
-			}
-
-			.hz-pgh-mobile-ul {
-				flex-direction: column;
+				align-items: center;
 			}
 
 			.hz-pgh-container {
@@ -618,8 +604,10 @@ class Premium_Glass_Header extends Widget_Base
 				justify-content: space-between;
 				align-items: center;
 				width: 100%;
-				max-width: 1400px;
+				max-width: 1440px;
 				margin: 0 auto;
+				padding: 0 40px;
+				height: 100%;
 			}
 
 			.hz-pgh-logo {
@@ -628,10 +616,43 @@ class Premium_Glass_Header extends Widget_Base
 				align-items: center;
 			}
 
+			.hz-pgh-logo img {
+				max-height: 40px;
+				width: auto;
+				display: block;
+			}
+
 			.hz-pgh-desktop-nav {
 				flex: 1 1 60%;
 				display: flex;
 				justify-content: center;
+				align-items: center;
+				height: 100%;
+			}
+
+			.hz-pgh-menu-ul {
+				list-style: none !important;
+				margin: 0 !important;
+				padding: 0 !important;
+				display: flex;
+				gap: 35px;
+				align-items: center;
+				height: 100%;
+			}
+
+			.hz-pgh-menu-ul li {
+				position: relative;
+				height: 100%;
+				display: flex;
+				align-items: center;
+			}
+
+			.hz-pgh-menu-ul li a {
+				text-decoration: none;
+				font-size: 14px;
+				font-weight: 500;
+				letter-spacing: 1px;
+				text-transform: uppercase;
 			}
 
 			.hz-pgh-icons-group {
@@ -639,19 +660,159 @@ class Premium_Glass_Header extends Widget_Base
 				display: flex;
 				justify-content: flex-end;
 				align-items: center;
-				gap: 25px;
+				gap: 20px;
 			}
 
-			.hz-pgh-sticky-logo {
+			.hz-pgh-icon-btn {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				text-decoration: none;
+				color: inherit;
+				position: relative;
+			}
+
+			.hz-pgh-hamburger {
 				display: none;
+				flex-direction: column;
+				justify-content: space-between;
+				width: 24px;
+				height: 18px;
+				background: transparent;
+				border: none;
+				cursor: pointer;
+				padding: 0;
+				z-index: 10002;
 			}
 
-			.hz-pgh-wrapper.has-sticky-logo.is-sticky .hz-pgh-normal-logo {
-				display: none;
-			}
-
-			.hz-pgh-wrapper.has-sticky-logo.is-sticky .hz-pgh-sticky-logo {
+			.hz-pgh-hamburger-line {
 				display: block;
+				width: 100%;
+				height: 2px;
+				background-color: currentColor;
+			}
+
+			.hz-pgh-mobile-drawer,
+			.hz-pgh-search-overlay {
+				position: fixed !important;
+				top: 0 !important;
+				left: 0 !important;
+				width: 100% !important;
+				height: 100% !important;
+				height: 100vh !important;
+				opacity: 0 !important;
+				visibility: hidden !important;
+				pointer-events: none !important;
+				z-index: 999999 !important;
+			}
+
+			.hz-pgh-mobile-drawer.is-active,
+			.hz-pgh-search-overlay.is-active {
+				opacity: 1 !important;
+				visibility: visible !important;
+				pointer-events: auto !important;
+			}
+
+			.hz-pgh-drawer-content {
+				position: fixed !important;
+				top: 0 !important;
+				bottom: 0 !important;
+				right: -100% !important;
+				max-width: 400px;
+				width: 100%;
+				height: 100% !important;
+				height: 100vh !important;
+				height: 100dvh !important;
+				background: #ffffff !important;
+				display: flex !important;
+				flex-direction: column !important;
+				z-index: 1000000 !important;
+				overflow: hidden !important;
+			}
+
+			.hz-pgh-mobile-drawer.is-active .hz-pgh-drawer-content {
+				right: 0 !important;
+			}
+
+			.hz-pgh-drawer-header {
+				display: flex !important;
+				justify-content: space-between !important;
+				align-items: center !important;
+				padding: 24px 30px !important;
+				border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+				background: #ffffff !important;
+				flex-shrink: 0 !important;
+			}
+
+			.hz-pgh-mobile-nav {
+				flex: 1 1 auto !important;
+				overflow-y: auto !important;
+				-webkit-overflow-scrolling: touch !important;
+				padding: 24px 30px !important;
+				background: #ffffff !important;
+			}
+
+			.hz-pgh-drawer-footer {
+				padding: 20px 30px !important;
+				padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px)) !important;
+				border-top: 1px solid rgba(0, 0, 0, 0.08) !important;
+				margin-top: auto !important;
+				background: #ffffff !important;
+				flex-shrink: 0 !important;
+			}
+
+			.hz-pgh-drawer-icons {
+				display: flex !important;
+				justify-content: space-around !important;
+				align-items: center !important;
+				gap: 15px !important;
+			}
+
+			.hz-pgh-drawer-icons .hz-pgh-icon-btn {
+				display: flex !important;
+				visibility: visible !important;
+				opacity: 1 !important;
+				justify-content: center !important;
+				align-items: center !important;
+				width: 45px !important;
+				height: 45px !important;
+				border-radius: 50% !important;
+				background: rgba(0, 0, 0, 0.03) !important;
+				color: #000000 !important;
+				position: relative !important;
+				text-decoration: none !important;
+			}
+
+			.hz-pgh-logo img.hz-pgh-normal-logo {
+				display: block !important;
+			}
+
+			.hz-pgh-logo img.hz-pgh-sticky-logo,
+			.hz-pgh-sticky-logo {
+				display: none !important;
+			}
+
+			.hz-pgh-wrapper.has-sticky-logo.is-sticky .hz-pgh-logo img.hz-pgh-normal-logo {
+				display: none !important;
+			}
+
+			.hz-pgh-wrapper.has-sticky-logo.is-sticky .hz-pgh-logo img.hz-pgh-sticky-logo {
+				display: block !important;
+			}
+
+			@media (max-width: 1024px) {
+				.hz-pgh-desktop-nav {
+					display: none !important;
+				}
+				.hz-pgh-hamburger {
+					display: flex !important;
+				}
+			}
+
+			@media (max-width: 767px) {
+				.hz-pgh-container {
+					padding: 0 20px;
+				}
 			}
 		</style>
 		<div class="hz-pgh-wrapper <?php echo esc_attr($wrapper_classes); ?>"
@@ -681,10 +842,13 @@ class Premium_Glass_Header extends Widget_Base
 							<?php if (!empty($settings['logo_image']['url'])): ?>
 								<img src="<?php echo esc_url($settings['logo_image']['url']); ?>" class="hz-pgh-normal-logo"
 									alt="<?php echo esc_attr(get_bloginfo('name')); ?>">
-								<?php if (!empty($settings['sticky_logo_image']['url'])): ?>
+								<?php if ($has_distinct_sticky_logo): ?>
 									<img src="<?php echo esc_url($settings['sticky_logo_image']['url']); ?>" class="hz-pgh-sticky-logo"
 										alt="<?php echo esc_attr(get_bloginfo('name')); ?>">
 								<?php endif; ?>
+							<?php elseif (!empty($settings['sticky_logo_image']['url'])): ?>
+								<img src="<?php echo esc_url($settings['sticky_logo_image']['url']); ?>" class="hz-pgh-normal-logo"
+									alt="<?php echo esc_attr(get_bloginfo('name')); ?>">
 							<?php else: ?>
 								<h2><?php echo esc_html(get_bloginfo('name')); ?></h2>
 							<?php endif; ?>
@@ -720,7 +884,7 @@ class Premium_Glass_Header extends Widget_Base
 						<?php endif; ?>
 
 						<?php if ($settings['show_account'] === 'yes'): ?>
-							<a href="<?php echo $is_woocommerce_active ? esc_url(wc_get_page_permalink('myaccount')) : '#'; ?>"
+							<a href="<?php echo esc_url($account_url); ?>"
 								class="hz-pgh-icon-btn" aria-label="Account">
 								<svg style="width: 24px; height: 24px; min-width: 24px;" viewBox="0 0 24 24" fill="none"
 									stroke="currentColor" stroke-width="2">
@@ -731,7 +895,7 @@ class Premium_Glass_Header extends Widget_Base
 						<?php endif; ?>
 
 						<?php if ($settings['show_wishlist'] === 'yes'): ?>
-							<a href="#" class="hz-pgh-icon-btn hz-pgh-wishlist-btn" aria-label="Wishlist">
+							<a href="<?php echo esc_url($wishlist_url); ?>" class="hz-pgh-icon-btn hz-pgh-wishlist-btn" aria-label="Wishlist">
 								<svg style="width: 24px; height: 24px; min-width: 24px;" viewBox="0 0 24 24" fill="none"
 									stroke="currentColor" stroke-width="2">
 									<path
@@ -742,14 +906,7 @@ class Premium_Glass_Header extends Widget_Base
 							</a>
 						<?php endif; ?>
 
-						<?php if ($settings['show_cart'] === 'yes'):
-							$cart_count = 0;
-							$cart_url = '#';
-							if ($is_woocommerce_active && !is_null(WC()->cart)) {
-								$cart_count = WC()->cart->get_cart_contents_count();
-								$cart_url = wc_get_cart_url();
-							}
-							?>
+						<?php if ($settings['show_cart'] === 'yes'): ?>
 							<a href="<?php echo esc_url($cart_url); ?>" class="hz-pgh-icon-btn" aria-label="Cart">
 								<svg style="width: 24px; height: 24px; min-width: 24px;" viewBox="0 0 24 24" fill="none"
 									stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -804,19 +961,9 @@ class Premium_Glass_Header extends Widget_Base
 					</nav>
 					<div class="hz-pgh-drawer-footer">
 						<div class="hz-pgh-drawer-icons">
-							<?php if ($settings['show_search'] === 'yes'): ?>
-								<a href="#" class="hz-pgh-icon-btn hz-pgh-search-toggle" aria-label="Search">
-									<svg style="width: 24px; height: 24px; min-width: 24px;" viewBox="0 0 24 24" fill="none"
-										stroke="currentColor" stroke-width="2">
-										<circle cx="11" cy="11" r="8"></circle>
-										<line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-									</svg>
-								</a>
-							<?php endif; ?>
-
-							<?php if ($settings['show_account'] === 'yes'): ?>
-								<a href="<?php echo esc_url(wp_login_url()); ?>" class="hz-pgh-icon-btn" aria-label="Account">
-									<svg style="width: 24px; height: 24px; min-width: 24px;" viewBox="0 0 24 24" fill="none"
+							<?php if ($settings['show_account'] !== 'no'): ?>
+								<a href="<?php echo esc_url($account_url); ?>" class="hz-pgh-icon-btn" aria-label="Account">
+									<svg style="width: 22px; height: 22px; min-width: 22px;" viewBox="0 0 24 24" fill="none"
 										stroke="currentColor" stroke-width="2">
 										<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
 										<circle cx="12" cy="7" r="4"></circle>
@@ -824,9 +971,9 @@ class Premium_Glass_Header extends Widget_Base
 								</a>
 							<?php endif; ?>
 
-							<?php if ($settings['show_wishlist'] === 'yes'): ?>
-								<a href="#" class="hz-pgh-icon-btn" aria-label="Wishlist">
-									<svg style="width: 24px; height: 24px; min-width: 24px;" viewBox="0 0 24 24" fill="none"
+							<?php if ($settings['show_wishlist'] !== 'no'): ?>
+								<a href="<?php echo esc_url($wishlist_url); ?>" class="hz-pgh-icon-btn hz-pgh-wishlist-btn" aria-label="Wishlist">
+									<svg style="width: 22px; height: 22px; min-width: 22px;" viewBox="0 0 24 24" fill="none"
 										stroke="currentColor" stroke-width="2">
 										<path
 											d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
@@ -836,16 +983,9 @@ class Premium_Glass_Header extends Widget_Base
 								</a>
 							<?php endif; ?>
 
-							<?php if ($settings['show_cart'] === 'yes'):
-								$cart_count = 0;
-								$cart_url = '#';
-								if ($is_woocommerce_active && !is_null(WC()->cart)) {
-									$cart_count = WC()->cart->get_cart_contents_count();
-									$cart_url = wc_get_cart_url();
-								}
-								?>
+							<?php if ($settings['show_cart'] !== 'no'): ?>
 								<a href="<?php echo esc_url($cart_url); ?>" class="hz-pgh-icon-btn" aria-label="Cart">
-									<svg style="width: 24px; height: 24px; min-width: 24px;" viewBox="0 0 24 24" fill="none"
+									<svg style="width: 22px; height: 22px; min-width: 22px;" viewBox="0 0 24 24" fill="none"
 										stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 										<path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
 									</svg>
