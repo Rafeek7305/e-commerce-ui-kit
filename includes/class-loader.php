@@ -48,6 +48,8 @@ final class Loader
 		require_once HANDZOM_UI_KIT_PATH . 'checkout/class-checkout.php';
 		require_once HANDZOM_UI_KIT_PATH . 'content-section/class-content-section.php';
 		require_once HANDZOM_UI_KIT_PATH . 'single-product/class-single-product.php';
+		require_once HANDZOM_UI_KIT_PATH . 'account/class-account.php';
+		require_once HANDZOM_UI_KIT_PATH . 'includes/class-email-notifications.php';
 	}
 
 	/**
@@ -81,6 +83,12 @@ final class Loader
 
 		// Initialize Checkout Module
 		Checkout_Module::instance();
+
+		// Initialize Account Module
+		Account_Module::instance();
+
+		// Initialize Email Notifications Module
+		Email_Notifications::instance();
 
 		// Initialize Content Section
 		Content_Section::instance();
