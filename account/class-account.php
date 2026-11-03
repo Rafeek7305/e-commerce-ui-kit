@@ -28,6 +28,12 @@ class Account_Module
 		add_filter('woocommerce_locate_template', [$this, 'override_account_template'], 20, 3);
 		add_filter('wc_get_template', [$this, 'filter_wc_get_template'], 20, 5);
 		add_action('woocommerce_account_navigation', [$this, 'ensure_assets_enqueued'], 5);
+
+		// Remove Downloads completely from navigation
+		add_filter('woocommerce_account_menu_items', [$this, 'filter_account_menu_items'], 999);
+
+		// Handle direct access to downloads endpoint safely
+		add_action('template_redirect', [$this, 'handle_downloads_endpoint']);
 	}
 
 	/**
@@ -94,5 +100,27 @@ class Account_Module
 			}
 		}
 		return $located;
+	}
+
+	/**
+	 * Remove Downloads option completely from the My Account navigation
+	 */
+	public function filter_account_menu_items($items)
+	{
+		if (isset($items['downloads'])) {
+			unset($items['downloads']);
+		}
+		return $items;
+	}
+
+	/**
+	 * Safely handle direct access to downloads endpoint
+	 */
+	public function handle_downloads_endpoint()
+	{
+		if (function_exists('is_wc_endpoint_url') && is_wc_endpoint_url('downloads')) {
+			wp_safe_redirect(wc_get_account_endpoint_url('dashboard'));
+			exit;
+		}
 	}
 }
